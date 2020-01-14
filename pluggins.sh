@@ -1,24 +1,6 @@
-echo "installing apt packages"
-
-apt install git
-apt install vim
-apt install tmux
-apt install zsh
-
-echo "installing oh-my-zsh"
-
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-echo "installing oh-my-tmux"
-
-git clone https://github.com/gpakosz/.tmux.git
-ln -s -f .tmux/.tmux.conf
-cp .tmux/.tmux.conf.local .
-
-echo "installing vim pluggins"
-
-mkdir ~/.vim/bundle
+mkdir ~/.vim
 mkdir ~/.vim/autoload
+mkdir ~/.vim/bundle
 
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
