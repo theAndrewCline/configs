@@ -1,5 +1,8 @@
 window:
-  decoration: 'none'
+  # I like full for MacOS
+  # and none for Ubuntu
+  decorations: 'full'
+  # decorations: 'none'
 
 font:
   normal:
