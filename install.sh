@@ -22,10 +22,10 @@ then
   git clone https://github.com/w0rp/ale $HOME/.vim/bundle/ale
   git clone https://github.com/neoclide/coc.nvim $HOME/.vim/bundle/coc.nvim
   git clone https://github.com/scrooloose/nerdtree $HOME/.vim/bundle/nerdtree
-  echo"\n"
+  echo""
 else
   echo "okay you will need to install your own plugins"
-  echo"\n"
+  echo""
 fi
 
 function check_file () {
@@ -75,8 +75,64 @@ if [[ $REPLY == "y" ]]
     echo "alacrity config not installed"
 fi
 
+echo "Do you want to install web development coc plugins (tsserver, json, html, css)? (y/n)"
+read
+if [[ $REPLY == 'y' ]]
+then
+# Install extensions for coc.nvim
+  mkdir -p ~/.config/coc/extensions
+  cd ~/.config/coc/extensions
+  if [ ! -f package.json ]
+  then
+    echo '{"dependencies":{}}'> package.json
+  fi
+# Change extension names to the extensions you need
+  npm install coc-tsserver coc-json coc-html coc-css --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+fi
+
+echo "Do you want to install rust coc plugins? (y/n)"
+read
+if [[ $REPLY == 'y' ]]
+then
+  mkdir -p ~/.config/coc/extensions
+  cd ~/.config/coc/extensions
+  if [ ! -f package.json ]
+  then
+    echo '{"dependencies":{}}'> package.json
+  fi
+  npm install coc-rls --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+fi
+
+
+echo "Do you want to install git coc plugins? (y/n)"
+read
+if [[ $REPLY == 'y' ]]
+then
+  mkdir -p ~/.config/coc/extensions
+  cd ~/.config/coc/extensions
+  if [ ! -f package.json ]
+  then
+    echo '{"dependencies":{}}'> package.json
+  fi
+  npm install coc-git --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+fi
+
+cd ~/.vim/bundle/coc.nvim
+./install.sh
+
+echo ""
+echo "----------"
+
+echo "Do you want to install fzf? (y/n)"
+read
+if [[ $REPLY == 'y' ]]
+then
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+fi
+
 echo ""
 echo "Installation Complete"
 echo ""
-echo "** Special thank you to jsbarrett, jonhoo, tpope, and all the other inspirations and plugin authors **"
+echo "** Special thank you to jsbarrett, jonhoo, tpope, and all the other teachers, inspirations, and plugin authors **"
 echo "** Please submit any issues to https://www.github.com/theAndrewCline/configs **"
