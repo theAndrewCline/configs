@@ -1,6 +1,7 @@
 #! /bin/bash
 
-echo "Andrew Cline's Most Excellent Config Files"
+echo "** Andrew Cline's Most Excellent Config Files **"
+echo ""
 
 date=$(date '+%Y-%m-%d--%H-%M-%S')
 
@@ -26,20 +27,18 @@ else
 fi
 
 function check_file () {
-  if [[ -f /home/$USER/$1  ]]
+  if [[ -f $HOME/$1  ]]
   then
-    echo "/home/$USER/"
-    echo ""
+    echo "in $HOME/"
     echo "A $1 file already exists... would you like to create a bk and replace it? (y/n)"
     read
     if [[ $REPLY == "y"  ]]
     then
-      mv /home/$USER/$1 /home/$USER/$1.$date.bk
-      ln -s $PWD/$1 /home/$USER/$1
+      mv $HOME/$1 $HOME/$1.$date.bk
+      cp $PWD/$1 $HOME/$1
+      echo "----------"
       echo ""
       echo "$1 updated"
-      echo ""
-      echo "----------"
     else
       echo ""
       echo "$1 not changed"
@@ -51,13 +50,26 @@ function check_file () {
     echo "$1 updated"
     echo ""
     echo "----------"
-    ln -s $PWD/$1 /home/$USER/$1
+    ln -s $PWD/$1 $HOME/$1
   fi
 }
 
 check_file ".vimrc"
 check_file ".zshrc"
-check_file ".alacritty.yml"
+check_file ".bashrc"
+
+echo ""
+echo "would you like to install alacritty config? (y/n)"
+read
+if [[ $REPLY == "y" ]]
+  then
+    check_file ".alacritty.yml"
+    echo "alacrity config installed"
+  else
+    echo "alacrity config not installed"
+fi
 
 echo "Installation Complete"
-echo "Special thank you to jsbarrett, jonhoo, tpope, and all the other plugin authors and inspiration"
+echo ""
+echo "** Special thank you to jsbarrett, jonhoo, tpope, and all the other inspirations and plugin authors **"
+echo "** Please submit any issues to https://github.com/theAndrewCline/configs **"
