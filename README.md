@@ -15,7 +15,7 @@ cd into the project and run the install script.
 ./install.sh
 ```
 
-this will create a symbolic link in your home directory to the necisary config files.
+this will create a symbolic link in your home directory to the necessary config files.
 
 I mostly use oh-my-zsh for my terminal, so you may want to consider installing that.
 
