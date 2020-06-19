@@ -30,6 +30,9 @@ let g:gruvbox_contrast_dark="hard"
 colorscheme gruvbox
 set termguicolors     " enable true colors support
 
+" this setting works in alacrity
+set term=xterm-256color
+
 " NerdTree stuff
 let g:NERDTreeWinSize = 20
 nnoremap <C-e> :NERDTreeToggle<CR>
