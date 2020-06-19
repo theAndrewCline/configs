@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# I don't typically, but just in case I don't
+# I don't typically use bash, but just in case I do
 # Copied from https://github.com/jsbarret/vim-setup
 
 ### MORE SENSIBLE BASH
-bind "set completion-ignore-case on"
-bind "set completion-map-case on"
-bind "set show-all-if-ambiguous on"
+# bind "set completion-ignore-case on"
+# bind "set completion-map-case on"
+# bind "set show-all-if-ambiguous on"
 
 # Append to the history file, don't overwrite it
 shopt -s histappend
@@ -34,7 +34,7 @@ shopt -s autocd
 shopt -s dirspell
 shopt -s cdspell
 
-bind 'TAB:menu-complete'
+# bind 'TAB:menu-complete'
 
 # get colors working in bash
 export TERM=xterm-256color
