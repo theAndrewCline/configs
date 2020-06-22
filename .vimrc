@@ -53,6 +53,11 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 let g:ctrlp_custom_ignore = 'node_modules'
 
+" use rg for grep
+set grepprg=rg\ -S\ --vimgrep
+
+packadd cfilter
+
 " fzf path and command
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-p> :Files<CR>
