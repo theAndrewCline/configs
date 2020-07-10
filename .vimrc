@@ -59,5 +59,5 @@ set grepprg=rg\ -S\ --vimgrep
 packadd cfilter
 
 " fzf path and command
-set rtp+=/usr/local/opt/fzf
+set rtp+=$USER/.fzf/bin/fzf
 nnoremap <C-p> :Files<CR>

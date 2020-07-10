@@ -1,14 +1,14 @@
 window:
   # I like full for MacOS
   # and none for Ubuntu
-  decorations: 'full'
-  # decorations: 'none'
+  # decorations: 'full'
+  decorations: 'none'
 
 font:
   normal:
     family: 'Dank Mono'
 
-  size: 16
+  size: 14
 # Colors (Gruvbox dark)
 colors:
   # Default colors
