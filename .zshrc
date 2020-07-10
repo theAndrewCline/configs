@@ -97,3 +97,5 @@ export PATH=$PATH:/home/$USER/.local/bin
 export PATH=/home/$USER/.scripts:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_DEFAULT_COMMAND="rg --files"
