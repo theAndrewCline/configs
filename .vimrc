@@ -31,10 +31,20 @@ colorscheme gruvbox
 set termguicolors     " enable true colors support
 
 " this setting works in alacrity
-set term=xterm-256color
+" set term=xterm-256color
+
+" this setting deals with slowness on escape
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
 
 " NerdTree stuff
-let g:NERDTreeWinSize = 20
+let g:NERDTreeWinSize = 35
 nnoremap <C-e> :NERDTreeToggle<CR>
 
 " ale stuff
@@ -42,22 +52,63 @@ let g:ale_linters = {
         \ 'javascript': ['eslint'],
         \ 'typescript' : ['tsserver','tslint', 'eslint'],
         \ 'vue' : ['eslint'],
-        \ 'rust': ['cargo', 'rls', 'rustc']
+        \ 'rust': ['cargo', 'rls', 'clippy']
       \ }
 let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'javascript': ['eslint'],
-        \   'typescript': ['tslint', 'eslint'],
-        \   'rust': ['rustfmt' ]
+        \   'javascript': ['prettier'],
+        \   'typescript': ['tslint'],
+        \   'vue': ['prettier'],
+        \   'rust': ['rustfmt']
         \}
 let g:ale_fix_on_save = 1
 let g:ctrlp_custom_ignore = 'node_modules'
 
 " use rg for grep
 set grepprg=rg\ -S\ --vimgrep
-
 packadd cfilter
 
 " fzf path and command
-set rtp+=$USER/.fzf/bin/fzf
+set rtp+=~/.fzf
 nnoremap <C-p> :Files<CR>
+
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+" By default timeoutlen is 1000 ms
+set timeoutlen=500
+
+let g:mapleader = "\<Space>"
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+
+" the following mapping is a shortcut for a reasonable default grepping method in vim
+nnoremap <leader>f :grep! "" \| cwindow<S-left><S-left><left><left>
+nnoremap <leader>p :FZF<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>b :Buffers<CR>
+
+let g:which_key_map = {}
+let g:which_key_map["f"] = "grep"
+let g:which_key_map["p"] = "find file"
+let g:which_key_map["e"] = "explorer"
+let g:which_key_map["b"] = "switch buffer"
+
+let g:which_key_map["*"] = "which_key_ignore"
+let g:which_key_map["h"] = { "name": "which_key_ignore" }
+
+set inccommand=nosplit
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Symbol renaming.
+let g:which_key_map["r"] = "rename symbol"
+nmap <leader>r <Plug>(coc-rename)
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
