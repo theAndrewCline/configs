@@ -52,21 +52,28 @@ let g:ale_linters = {
         \ 'javascript': ['eslint'],
         \ 'typescript' : ['tsserver','tslint', 'eslint'],
         \ 'vue' : ['eslint'],
-        \ 'rust': ['cargo', 'rls', 'clippy']
+        \ 'rust': ['cargo', 'rls', 'clippy'],
+        \ 'haskell': ['hlint']
       \ }
 
 let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'javascript': ['prettier'],
-        \   'typescript': ['tslint'],
+        \   'typescript': ['prettier'],
         \   'vue': ['prettier'],
-        \   'rust': ['rustfmt']
+        \   'html': ['prettier'],
+        \   'haskell' : ['floskell'],
+        \   'rust': ['rustfmt'],
+        \   'elm': ['elm-format'],
+        \   'scss': ['prettier'],
+        \   'css': ['prettier'],
+        \   'sass': ['prettier']
         \}
 
 let g:ale_fix_on_save = 1
 let g:ctrlp_custom_ignore = 'node_modules'
 
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma none --no-semi'
+" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma none --no-semi'
 
 " use rg for grep
 set grepprg=rg\ -S\ --vimgrep

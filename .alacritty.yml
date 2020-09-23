@@ -8,7 +8,7 @@ font:
   normal:
     family: 'Dank Mono'
 
-  size: 14
+  size: 12
 # Colors (Gruvbox dark)
 colors:
   # Default colors
