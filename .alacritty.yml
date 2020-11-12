@@ -3,6 +3,9 @@ window:
   # and none for Ubuntu
   # decorations: 'full'
   decorations: 'none'
+  padding:
+    x: 20
+    y: 20
 
 font:
   normal:
