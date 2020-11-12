@@ -51,15 +51,20 @@ nnoremap <C-e> :NERDTreeToggle<CR>
 let g:ale_linters = {
         \ 'javascript': ['eslint'],
         \ 'typescript' : ['tsserver','tslint', 'eslint'],
+        \ 'typescriptreact' : ['tsserver', 'eslint'],
+        \ 'javascriptreact' : ['eslint'],
         \ 'vue' : ['eslint'],
         \ 'rust': ['cargo', 'rls', 'clippy'],
-        \ 'haskell': ['hlint']
+        \ 'haskell': ['hlint'],
+        \ 'elm': ['elm-language-server']
       \ }
 
 let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'javascript': ['prettier'],
+        \   'javascriptreact': ['prettier'],
         \   'typescript': ['prettier'],
+        \   'typescriptreact': ['prettier'],
         \   'vue': ['prettier'],
         \   'html': ['prettier'],
         \   'haskell' : ['floskell'],
@@ -73,7 +78,7 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 let g:ctrlp_custom_ignore = 'node_modules'
 
-" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma none --no-semi'
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma none --no-semi'
 
 " use rg for grep
 set grepprg=rg\ -S\ --vimgrep
@@ -123,3 +128,6 @@ nmap <leader>r <Plug>(coc-rename)
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+xmap <leader>c  :CocCommand<CR>
+nmap <leader>c  :CocCommand<CR>
