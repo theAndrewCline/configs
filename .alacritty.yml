@@ -9,10 +9,10 @@ window:
 
 font:
   normal:
-    family: 'Hack'
-    # style: 'Regular'
+    family: 'Dank Mono'
+    style: 'Regular'
 
-  size: 12
+  size: 13
 # Colors (Gruvbox dark)
 colors:
   # Default colors
