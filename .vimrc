@@ -23,6 +23,8 @@ set autoindent " new line will match previous line
 set breakindent " wrapped lines are indented visually
 set smartindent " syntax cued indenting
 
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+
 " colors
 syntax enable
 set background=dark
