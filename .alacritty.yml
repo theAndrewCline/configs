@@ -1,8 +1,8 @@
 window:
-  # I like full for MacOS
-  # and none for Ubuntu
-  # decorations: 'full'
-  decorations: 'none'
+  # Full for MacOS
+  decorations: 'full'
+  # None for PopOS
+  # decorations: 'none'
   padding:
     x: 20
     y: 20
@@ -12,7 +12,10 @@ font:
     family: 'Dank Mono'
     style: 'Regular'
 
-  size: 13
+  # normal screen
+  # size: 13
+  # retina display
+  size: 15
 # Colors (Gruvbox dark)
 colors:
   # Default colors
