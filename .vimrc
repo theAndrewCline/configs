@@ -52,8 +52,8 @@ nnoremap <C-e> :NERDTreeToggle<CR>
 " ale stuff
 let g:ale_linters = {
         \ 'javascript': ['eslint'],
-        \ 'typescript' : ['tsserver','tslint', 'eslint'],
-        \ 'typescriptreact' : ['tsserver', 'eslint'],
+        \ 'typescript' : ['tsserver','eslint'],
+        \ 'typescriptreact' : ['eslint'],
         \ 'javascriptreact' : ['eslint'],
         \ 'vue' : ['eslint'],
         \ 'rust': ['cargo', 'rls', 'clippy'],
@@ -80,7 +80,8 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 let g:ctrlp_custom_ignore = 'node_modules'
 
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma none --no-semi'
+" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma none --no-semi'
+let g:ale_javascript_prettier_use_local_config = 1
 
 " use rg for grep
 set grepprg=rg\ -S\ --vimgrep
