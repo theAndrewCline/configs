@@ -1,0 +1,13 @@
+{
+  "css.customData": ["~/.config/nvim/coc/tailwind.json"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "json",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "prettier.semi": false,
+  "prettier.singleQuote": true
+}
