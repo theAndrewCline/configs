@@ -6,8 +6,11 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "graphql",
+    "gql"
   ],
   "prettier.semi": false,
   "prettier.singleQuote": true
 }
+
