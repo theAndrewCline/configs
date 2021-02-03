@@ -93,8 +93,8 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH=$PATH:/home/$USER/.local/bin
-export PATH=/home/$USER/.scripts:$PATH
+export PATH=$PATH:~/.local/bin
+export PATH=~/.scripts:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
