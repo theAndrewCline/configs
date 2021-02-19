@@ -1,4 +1,5 @@
 https://github.com/ayu-theme/ayu-vim
+https://github.com/drewtempelmeyer/palenight.vim
 https://tpope.io/vim/sensible.git
 https://github.com/tpope/vim-vinegar.git
 https://github.com/tpope/vim-surround
@@ -11,3 +12,6 @@ https://github.com/junegunn/fzf
 https://github.com/sheerun/vim-polyglot.git
 https://github.com/liuchengxu/vim-which-key
 https://github.com/jparise/vim-graphql.git
+https://github.com/Yggdroot/indentLine.git
+https://github.com/vim-airline/vim-airline.git
+https://github.com/edkolev/tmuxline.vim

@@ -11,6 +11,6 @@
     "gql"
   ],
   "prettier.semi": false,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "none"
 }
-

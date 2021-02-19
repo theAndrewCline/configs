@@ -4,36 +4,44 @@ set number
 set colorcolumn=80
 set cursorline
 set foldmethod=indent
-set foldlevel=100
-" the following line shows a preview of changes by norm and other commands
-set inccommand=split 
+set foldlevel=100 " all folds open by default
+set inccommand=split " show a preview of the changes by norm command
 set mouse=a
+set encoding=utf-8
+set ruler
+set conceallevel=0 " so I can see ` in markdown files
+set tabstop=2 " 2 spaces for tab
+set updatetime=300 " faster completions
+set timeoutlen=100 " faster timeout
+set smarttab
+set expandtab
+set guifont=SpaceMono\ Nerd\ Font
 
-let g:mapleader = "\<Space>"
 
-" syntax
+"### SYNTAX AND COLOR SETTINGS ###
 syntax on
 set termguicolors
-let ayucolor="dark"
-colorscheme ayu
+let g:palenight_terminal_italics = 1
+colorscheme palenight
 
-" fzf path and command
+let g:airline_powerline_fonts = 1
+
+"### FZF PATH AND COMMAND ###
 set rtp+=~/.fzf
 nnoremap <C-p> :Files<CR>
 
 " use rg for grep
 set grepprg=rg\ -S\ --vimgrep
 
-" COC 
+"### COC SETTINGS ###
 
-" prettier
+" coc prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" KEY MAPPINGS
+"### CUSTOM KEY MAPPINGS ###
 
-" nnoremap - :Ex <CR>
+let g:mapleader = "\<Space>"
 
-" Which Key
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 nnoremap <leader>p :Files<CR>
@@ -42,6 +50,7 @@ nnoremap <leader>c :CocCommand<CR>
 nnoremap <leader>g :Gstatus<CR>
 nnoremap <leader>s :Rg<CR>
 nnoremap <leader>u :so $MYVIMRC<CR>
+nnoremap <leader>f :Goyo<CR>
 
 let g:which_key_map =  {}
 let g:which_key_map["p"] = "find file"
@@ -50,5 +59,6 @@ let g:which_key_map["c"] = "Coc Command"
 let g:which_key_map["g"] = "Git Status"
 let g:which_key_map["s"] = "search repository"
 let g:which_key_map["u"] = "update vim config"
+let g:which_key_map["f"] = "Focus Mode" " :Goyo
 
 call which_key#register("<SPACE>", "g:which_key_map")
