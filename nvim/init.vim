@@ -24,8 +24,6 @@ set termguicolors
 let g:palenight_terminal_italics = 1
 colorscheme palenight
 
-let g:airline_powerline_fonts = 1
-
 "### FZF PATH AND COMMAND ###
 set rtp+=~/.fzf
 nnoremap <C-p> :Files<CR>
@@ -47,16 +45,23 @@ nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <leader>p :Files<CR>
 nnoremap <leader>a :CocAction<CR>
 nnoremap <leader>c :CocCommand<CR>
-nnoremap <leader>g :Gstatus<CR>
 nnoremap <leader>s :Rg<CR>
 nnoremap <leader>u :so $MYVIMRC<CR>
 nnoremap <leader>f :Goyo<CR>
 
 let g:which_key_map =  {}
-let g:which_key_map["p"] = "find file"
+
+let g:which_key_map["p"] = "Find File"
 let g:which_key_map["a"] = "Coc Action"
 let g:which_key_map["c"] = "Coc Command"
-let g:which_key_map["g"] = "Git Status"
+let g:which_key_map["g"] = {
+                  \ "name": "Git actions",
+                  \ "c": [":Git commit", "Git Commit"],
+                  \ "s": [":G", "Git Status"],
+                  \ "p": [":Git pull", "Git Pull"],
+                  \ "P": [":Git push", "Git Push"],
+                  \ }
+
 let g:which_key_map["s"] = "search repository"
 let g:which_key_map["u"] = "update vim config"
 let g:which_key_map["f"] = "Focus Mode" " :Goyo

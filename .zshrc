@@ -99,7 +99,3 @@ export PATH=~/.scripts:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND="rg --files"
-
-# temporary add to fix umask issue on MacBook Pro
-
-umask 022
