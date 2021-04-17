@@ -21,8 +21,10 @@ set guifont=SpaceMono\ Nerd\ Font
 "### SYNTAX AND COLOR SETTINGS ###
 syntax on
 set termguicolors
-let g:palenight_terminal_italics = 1
-colorscheme palenight
+" let g:palenight_terminal_italics = 1
+" colorscheme palenight
+
+colorscheme ayu
 
 "### FZF PATH AND COMMAND ###
 set rtp+=~/.fzf
