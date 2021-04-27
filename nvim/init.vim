@@ -15,8 +15,8 @@ set updatetime=300 " faster completions
 set timeoutlen=100 " faster timeout
 set smarttab
 set expandtab
-set guifont=SpaceMono\ Nerd\ Font
 
+set guifont=Dank\ Mono\:h20
 
 "### SYNTAX AND COLOR SETTINGS ###
 syntax on
@@ -25,6 +25,10 @@ set termguicolors
 " colorscheme palenight
 
 colorscheme ayu
+
+let g:airline_theme='ayu'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 "### FZF PATH AND COMMAND ###
 set rtp+=~/.fzf

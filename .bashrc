@@ -51,3 +51,4 @@ alias ll="ls -A"
 [ -x "$(command -v rg)" ] && export FZF_DEFAULT_COMMAND='rg --files'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+source "$HOME/.cargo/env"
