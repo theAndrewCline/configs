@@ -1,5 +1,4 @@
 {
-  "css.customData": ["~/.config/nvim/coc/tailwind.json"],
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "json",
@@ -12,5 +11,6 @@
   ],
   "prettier.semi": false,
   "prettier.singleQuote": true,
-  "prettier.trailingComma": "none"
+  "prettier.trailingComma": "none",
+  "snippets.userSnippetsDirectory": "~/.config/nvim/snips"
 }
