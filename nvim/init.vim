@@ -16,7 +16,7 @@ set timeoutlen=100 " faster timeout
 set smarttab
 set expandtab
 
-set guifont=Dank\ Mono\:h20
+set guifont=Dank\ Mono\:h24
 
 "### SYNTAX AND COLOR SETTINGS ###
 syntax on
@@ -24,11 +24,11 @@ set termguicolors
 " let g:palenight_terminal_italics = 1
 " colorscheme palenight
 
-" let ayucolor="mirage" " for mirage version of theme
-" colorscheme ayu
+let ayucolor="dark" " for mirage version of theme
+colorscheme ayu
 
-let g:everforest_background = 'medium'
-colorscheme everforest
+" let g:everforest_background = 'medium'
+" colorscheme everforest
 
 
 " let g:airline_theme=''

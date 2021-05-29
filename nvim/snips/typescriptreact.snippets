@@ -1,5 +1,5 @@
 snippet rfc "React Functional Component" b
-const ${1: ComponentName} = (${2: props}) => {
+const ${1: ComponentName}: React.FC = (${2: props}) => {
 	return <>${3}</>
 }
 
@@ -7,7 +7,7 @@ endsnippet
 
 # HOOKS 
 snippet useS "useState Hook" b
-const [${1}, ${2}] = useState(${3})
+const [${1}, ${2}] = useState<${4:T}>(${3})
 endsnippet
 
 snippet useE "useEffect Hook" b
