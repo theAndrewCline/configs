@@ -20,7 +20,12 @@ set guifont=Dank\ Mono\:h24
 
 "### SYNTAX AND COLOR SETTINGS ###
 syntax on
-set termguicolors
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
 " let g:palenight_terminal_italics = 1
 " colorscheme palenight
 
@@ -102,6 +107,6 @@ let g:which_key_map["g"] = {
 
 let g:which_key_map["s"] = "search repository"
 let g:which_key_map["u"] = [ "update vim config", ":so $MYVIMRC" ]
-let g:which_key_map["f"] = [ "Focus Mode", ":Goyo"] 
+let g:which_key_map["f"] = [":Goyo", "Focus Mode"] 
 
 call which_key#register("<SPACE>", "g:which_key_map")
