@@ -37,7 +37,6 @@ set smarttab
 set expandtab
 
 
-
 set guifont=Dank\ Mono\:h24
 
 "### SYNTAX AND COLOR SETTINGS ###
@@ -104,31 +103,23 @@ let g:mapleader = "\<Space>"
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
-nnoremap <leader>p :Files<CR>
-nnoremap <leader>a :CocAction<CR>
-nnoremap <leader>c :CocCommand<CR>
-nnoremap <leader>s :Rg<CR>
-nnoremap <leader>u <CR>
-
-let g:which_key_map =  {}
-
-
-let g:which_key_map["p"] = "Find File"
-let g:which_key_map["a"] = "Coc Action"
-let g:which_key_map["A"] = ["<Plug>(coc-codeaction-selected)", "Coc Action Selected"]
-let g:which_key_map["c"] = "Coc Command"
-let g:which_key_map["d"] = [":CocDiagnostics", "Code Diagnostics"]
-let g:which_key_map["g"] = {
+let g:which_key_map =  {
+        \ 'p': [':Files', 'Search Files'],
+        \ 'a': [':CocAction', 'Code Action'],
+        \ 'A':  ["<Plug>(coc-codeaction-selected)", "Coc Action Selected"],
+        \ 'c': [':CocCommand', 'Code Command'],
+        \ 's': [':Rg', 'Search'],
+        \ 'd': [":CocDiagnostics", "Code Diagnostics"],
+        \ 'g': {
                   \ "name": "Git actions",
                   \ "c": [":Git commit", "Git Commit"],
                   \ "s": [":G", "Git Status"],
                   \ "p": [":Git pull", "Git Pull"],
                   \ "P": [":Git push", "Git Push"],
-                  \ }
-
-let g:which_key_map["s"] = "search repository"
-let g:which_key_map["u"] = [ ":so $MYVIMRC", "update vim config" ]
-let g:which_key_map["f"] = [":Goyo", "Focus Mode"] 
-let g:which_key_map[";"] = [":Buffers", "List Buffers"] 
+          \ },
+        \ 'u': [ ":so $MYVIMRC", "Refresh vimrc" ],
+        \ "f": [":Goyo", "Focus Mode"],
+        \ ";": [":Buffers", "List Buffers"] 
+        \ }
 
 call which_key#register("<SPACE>", "g:which_key_map")
