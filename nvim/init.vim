@@ -18,6 +18,10 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'ghifarit53/tokyonight-vim'
 
+" TESTING
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'folke/trouble.nvim'
+
 call plug#end()
 
 set number
@@ -123,3 +127,9 @@ let g:which_key_map =  {
         \ }
 
 call which_key#register("<SPACE>", "g:which_key_map")
+
+"##############################
+"###     TESTING CONFIG     ###
+"##############################
+
+lua require("trouble").setup{}
