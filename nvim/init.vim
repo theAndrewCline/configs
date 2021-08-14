@@ -106,7 +106,8 @@ let g:which_key_map["g"] = {
                   \ }
 
 let g:which_key_map["s"] = "search repository"
-let g:which_key_map["u"] = [ "update vim config", ":so $MYVIMRC" ]
+let g:which_key_map["u"] = [ ":so $MYVIMRC", "update vim config" ]
 let g:which_key_map["f"] = [":Goyo", "Focus Mode"] 
+let g:which_key_map[";"] = [":Buffers", "List Buffers"] 
 
 call which_key#register("<SPACE>", "g:which_key_map")

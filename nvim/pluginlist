@@ -1,6 +1,8 @@
 https://github.com/ayu-theme/ayu-vim
 https://github.com/drewtempelmeyer/palenight.vim
 https://github.com/sainnhe/vim-color-forest-night
+https://github.com/morhetz/gruvbox.git
+https://github.com/joshdick/onedark.vim.git
 https://tpope.io/vim/sensible.git
 https://github.com/tpope/vim-vinegar.git
 https://github.com/tpope/vim-surround
@@ -10,6 +12,7 @@ https://github.com/tpope/vim-repeat
 https://github.com/neoclide/coc.nvim
 https://github.com/junegunn/fzf.vim
 https://github.com/junegunn/fzf
+https://github.com/junegunn/goyo.vim.git
 https://github.com/sheerun/vim-polyglot.git
 https://github.com/liuchengxu/vim-which-key
 https://github.com/jparise/vim-graphql.git
