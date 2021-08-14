@@ -1,4 +1,23 @@
-execute pathogen#infect()
+call plug#begin('~/.vim/plugged')
+
+Plug 'Yggdroot/indentLine'
+Plug 'edkolev/tmuxline.vim'
+Plug 'jparise/vim-graphql'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'liuchengxu/vim-which-key'
+Plug 'neoclide/coc.nvim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'junegunn/seoul256.vim'
+
+call plug#end()
 
 set number
 set colorcolumn=80
@@ -26,15 +45,8 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-" let g:palenight_terminal_italics = 1
-" colorscheme palenight
-
-let ayucolor="dark" " for mirage version of theme
-colorscheme ayu
-
-" let g:everforest_background = 'medium'
-" colorscheme everforest
-
+set background=dark
+colo seoul256
 
 " let g:airline_theme=''
 let g:airline#extensions#tabline#enabled = 1
