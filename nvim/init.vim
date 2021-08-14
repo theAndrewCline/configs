@@ -1,13 +1,14 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 Plug 'edkolev/tmuxline.vim'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'liuchengxu/vim-which-key'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': 'yarn install --frozen-lockfile' }
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -15,7 +16,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
-Plug 'junegunn/seoul256.vim'
+Plug 'ghifarit53/tokyonight-vim'
 
 call plug#end()
 
@@ -35,6 +36,8 @@ set timeoutlen=100 " faster timeout
 set smarttab
 set expandtab
 
+
+
 set guifont=Dank\ Mono\:h24
 
 "### SYNTAX AND COLOR SETTINGS ###
@@ -45,8 +48,13 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
+set termguicolors
 set background=dark
-colo seoul256
+
+let g:tokyonight_style = 'storm' " available: night, storm
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight
 
 " let g:airline_theme=''
 let g:airline#extensions#tabline#enabled = 1
@@ -103,6 +111,7 @@ nnoremap <leader>s :Rg<CR>
 nnoremap <leader>u <CR>
 
 let g:which_key_map =  {}
+
 
 let g:which_key_map["p"] = "Find File"
 let g:which_key_map["a"] = "Coc Action"
