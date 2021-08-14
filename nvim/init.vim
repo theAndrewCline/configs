@@ -1,14 +1,17 @@
+" TODO: add binding for jumping to definition
+"
 call plug#begin('~/.vim/plugged')
 
-" Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 Plug 'edkolev/tmuxline.vim'
 Plug 'jparise/vim-graphql'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'liuchengxu/vim-which-key'
-Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': 'yarn install --frozen-lockfile' }
-Plug 'tpope/vim-sensible'
+" TESTING Native LSP
+" Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': 'yarn install --frozen-lockfile' }
+" Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -19,8 +22,16 @@ Plug 'vim-airline/vim-airline'
 Plug 'ghifarit53/tokyonight-vim'
 
 " TESTING
+Plug 'neovim/nvim-lspconfig' 
+Plug 'hrsh7th/nvim-compe' 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'folke/lsp-colors.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'glepnir/lspsaga.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
@@ -28,20 +39,17 @@ set number
 set colorcolumn=80
 set cursorline
 set foldmethod=indent
-set foldlevel=100 " all folds open by default
+set foldlevel=99 " all folds open by default
 set inccommand=split " show a preview of the changes by norm command
 set mouse=a
 set encoding=utf-8
 set ruler
 set conceallevel=0 " so I can see ` in markdown files
-set tabstop=2 " 2 spaces for tab
 set updatetime=300 " faster completions
 set timeoutlen=100 " faster timeout
-set smarttab
 set expandtab
-
-
-set guifont=Dank\ Mono\:h24
+set tabstop=2 " 2 spaces for tab
+set shiftwidth=2
 
 "### SYNTAX AND COLOR SETTINGS ###
 syntax on
@@ -65,31 +73,10 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 "### FZF PATH AND COMMAND ###
 set rtp+=~/.fzf
-nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :Telescope file_browser<CR>
 
 " use rg for grep
 set grepprg=rg\ -S\ --vimgrep
-
-"### COC SETTINGS ###
-
-" coc prettier
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -108,12 +95,10 @@ nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
 let g:which_key_map =  {
-        \ 'p': [':Files', 'Search Files'],
-        \ 'a': [':CocAction', 'Code Action'],
-        \ 'A':  ["<Plug>(coc-codeaction-selected)", "Coc Action Selected"],
-        \ 'c': [':CocCommand', 'Code Command'],
+        \ 'p': [':Telescope file_browser', 'Search Files'],
+        \ 'a': [':Telescope lsp_code_actions', 'Code Action'],
         \ 's': [':Rg', 'Search'],
-        \ 'd': [":CocDiagnostics", "Code Diagnostics"],
+        \ 'd': [":Telescope lsp_workspace_diagnostics", "Code Diagnostics"],
         \ 'g': {
                   \ "name": "Git actions",
                   \ "c": [":Git commit", "Git Commit"],
@@ -123,7 +108,7 @@ let g:which_key_map =  {
           \ },
         \ 'u': [ ":so $MYVIMRC", "Refresh vimrc" ],
         \ "f": [":Goyo", "Focus Mode"],
-        \ ";": [":Buffers", "List Buffers"] 
+        \ ";": [":Telescope buffers", "List Buffers"] 
         \ }
 
 call which_key#register("<SPACE>", "g:which_key_map")
@@ -131,5 +116,46 @@ call which_key#register("<SPACE>", "g:which_key_map")
 "##############################
 "###     TESTING CONFIG     ###
 "##############################
+lua require('lspconfig').tsserver.setup{}
+lua require('lspconfig').svelte.setup{}
+lua require('lspconfig').vuels.setup{}
+lua require('lspconfig').graphql.setup{}
 
-lua require("trouble").setup{}
+lua require('lspsaga').init_lsp_saga()
+
+lua << EOF
+require('gitsigns').setup {
+  current_line_blame = false,
+}
+EOF
+
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = { }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "c", "rust" },  -- list of language that will be disabled
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+lua << EOF
+require'nvim-web-devicons'.setup {
+ default = true;
+}
+EOF
+
+lua << EOF
+  require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
