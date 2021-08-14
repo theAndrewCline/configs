@@ -1,22 +1,7 @@
-# configs
+# WIP 
 
-These are the config files I am currently using.
+I would suggest waiting a bit to use this.
 
-You are free to use them if you wish.
+main branch is my stable config for daily work
 
-## Setup
-
-first clone this repo.
-
-You should be able to put it whereever you want it.
-
-cd into the project and run the install script.
-```bash
-./install.sh
-```
-
-this will create a symbolic link in your home directory to the necessary config files.
-
-I mostly use oh-my-zsh for my terminal, so you may want to consider installing that.
-
-I have included a sane bash profile, borrowed from [jsbarrett](https://www.github.com/jsbarrett/vim-setup)
+nightly is the new stuff i'm working on.
