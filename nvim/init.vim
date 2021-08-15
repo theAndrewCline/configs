@@ -22,16 +22,17 @@ Plug 'vim-airline/vim-airline'
 Plug 'ghifarit53/tokyonight-vim'
 
 " TESTING
-Plug 'neovim/nvim-lspconfig' 
-Plug 'hrsh7th/nvim-compe' 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'lewis6991/gitsigns.nvim'
 Plug 'folke/lsp-colors.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'glepnir/lspsaga.nvim'
+Plug 'hrsh7th/nvim-compe' 
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'neovim/nvim-lspconfig' 
+Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -67,9 +68,9 @@ let g:tokyonight_enable_italic = 1
 
 colorscheme tokyonight
 
-" let g:airline_theme=''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:webdevicons_enable_airline_statusline = 1
 
 "### FZF PATH AND COMMAND ###
 set rtp+=~/.fzf
@@ -95,7 +96,7 @@ nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
 let g:which_key_map =  {
-        \ 'p': [':Telescope file_browser', 'Search Files'],
+        \ 'p': [':Telescope git_files', 'Search Files'],
         \ 'a': [':Telescope lsp_code_actions', 'Code Action'],
         \ 's': [':Rg', 'Search'],
         \ 'd': [":Telescope lsp_workspace_diagnostics", "Code Diagnostics"],
@@ -121,11 +122,12 @@ lua require('lspconfig').svelte.setup{}
 lua require('lspconfig').vuels.setup{}
 lua require('lspconfig').graphql.setup{}
 
+lua require("trouble").setup {}
 lua require('lspsaga').init_lsp_saga()
 
 lua << EOF
 require('gitsigns').setup {
-  current_line_blame = false,
+  current_line_blame = true,
 }
 EOF
 
@@ -136,7 +138,7 @@ require'nvim-treesitter.configs'.setup {
   ignore_install = { }, -- List of parsers to ignore installing
   highlight = {
     enable = true,              -- false will disable the whole extension
-    disable = { "c", "rust" },  -- list of language that will be disabled
+    disable = { "c" },  -- list of language that will be disabled
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
@@ -152,10 +154,3 @@ require'nvim-web-devicons'.setup {
 }
 EOF
 
-lua << EOF
-  require("trouble").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-EOF
