@@ -9,9 +9,8 @@ window:
 
 font:
   normal:
-    family: "FiraCode Nerd Font Mono"
-    style: Regular
-
+    family: "Hack Nerd Font"
+    style: Regular 
   # normal screen
   # size: 13
   # retina display
