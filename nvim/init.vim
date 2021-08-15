@@ -70,7 +70,13 @@ colorscheme tokyonight
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_left_sep = "\uE0B4"
+let g:airline_right_sep = "\uE0B6"
+
+let g:airline_powerline_fonts = 1
 let g:webdevicons_enable_airline_statusline = 1
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_preset = 'full'
 
 "### FZF PATH AND COMMAND ###
 set rtp+=~/.fzf
