@@ -35,6 +35,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'ryanoasis/vim-devicons'
 Plug 'windwp/nvim-autopairs'
+Plug 'yardnsm/vim-import-cost'
+Plug 'kyazdani42/nvim-tree.lua'
 
 call plug#end()
 
@@ -77,12 +79,12 @@ let g:airline_right_sep = "\uE0B6"
 
 let g:airline_powerline_fonts = 1
 let g:webdevicons_enable_airline_statusline = 1
-let g:tmuxline_powerline_separators = 0
+let g:tmuxline_powerline_separators = 1
 let g:tmuxline_preset = 'full'
 
 "### FZF PATH AND COMMAND ###
 set rtp+=~/.fzf
-nnoremap <C-p> :Telescope file_browser<CR>
+nnoremap <C-p> :Telescope find_files<CR>
 
 " use rg for grep
 set grepprg=rg\ -S\ --vimgrep
@@ -100,13 +102,14 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 let g:mapleader = "\<Space>"
 
-nnoremap - :Telescope file_browser<CR>
+" nnoremap - :Telescope file_browser<CR>
+nnoremap - :NvimTreeToggle<CR>
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
 let g:which_key_map =  {
-        \ 'p': [':Telescope git_files', 'Search Files'],
+        \ 'p': [':Telescope find_files', 'Search Files'],
         \ 'a': [':Telescope lsp_code_actions', 'Code Action'],
         \ 's': [':Rg', 'Search'],
         \ 'd': [":Telescope lsp_workspace_diagnostics", "Code Diagnostics"],
@@ -167,3 +170,5 @@ require'nvim-web-devicons'.setup {
 }
 EOF
 
+let g:nvim_tree_auto_close = 1
+let g:nvim_tree_quit_on_open = 1
