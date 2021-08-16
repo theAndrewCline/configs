@@ -1,15 +1,12 @@
 window:
-  # Full for MacOS
   decorations: "full"
-  # None for PopOS
-  # decorations: 'none'
   padding:
     x: 10
     y: 10
 
 font:
   normal:
-    family: "Hack Nerd Font"
+    family: "FiraCode Nerd Font Mono"
     style: Regular 
   # normal screen
   # size: 13
