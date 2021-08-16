@@ -16,7 +16,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'ghifarit53/tokyonight-vim'
@@ -30,9 +30,11 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'neovim/nvim-lspconfig' 
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope-fzf-writer.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'ryanoasis/vim-devicons'
+Plug 'windwp/nvim-autopairs'
 
 call plug#end()
 
@@ -98,6 +100,8 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 let g:mapleader = "\<Space>"
 
+nnoremap - :Telescope file_browser<CR>
+
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
@@ -130,6 +134,9 @@ lua require('lspconfig').graphql.setup{}
 
 lua require("trouble").setup {}
 lua require('lspsaga').init_lsp_saga()
+lua require('nvim-autopairs').setup{}
+
+" lua require('telescope').extensions.fzf_writer.files()
 
 lua << EOF
 require('gitsigns').setup {
