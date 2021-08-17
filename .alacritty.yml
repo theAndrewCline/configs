@@ -331,3 +331,9 @@ schemes:
       white:   '0xacb0d0'
 
 colors: *tokyo-night-storm
+
+cursor:
+  style: 
+    shape: block
+    blinking: Always
+
