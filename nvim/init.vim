@@ -32,11 +32,11 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-writer.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'prettier/vim-prettier', { 'do': 'yarn install',  }
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'windwp/nvim-autopairs'
-Plug 'yardnsm/vim-import-cost'
+Plug 'yardnsm/vim-import-cost', { 'do': 'yarn install' }
 
 call plug#end()
 
@@ -195,7 +195,7 @@ require('gitsigns').setup {
   current_line_blame = true,
 }
 
-require'nvim-treesitter.configs'.setup {
+--[[ require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = { }, -- List of parsers to ignore installing
   highlight = {
@@ -208,12 +208,9 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+--]]
 
 require'nvim-web-devicons'.setup {
  default = true;
 }
 EOF
-
-
-
-
