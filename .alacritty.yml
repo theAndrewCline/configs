@@ -6,44 +6,12 @@ window:
 
 font:
   normal:
-    family: "FiraCode Nerd Font Mono"
-    style: Regular 
+    family: "FiraMono Nerd Font"
+    style: Regular
   # normal screen
   # size: 13
   # retina display
   size: 15
-
-# # Colors (Gruvbox dark)
-# colors:
-#   # Default colors
-#   primary:
-#     # hard contrast:
-#     background:   '0x1d2021'
-#     # background: '0x282828'
-#     # soft contrast: background = '0x32302f'
-#     foreground: '0xebdbb2'
-
-#   # Normal colors
-#   normal:
-#     black:   '0x282828'
-#     red:     '0xcc241d'
-#     green:   '0x98971a'
-#     yellow:  '0xd79921'
-#     blue:    '0x458588'
-#     magenta: '0xb16286'
-#     cyan:    '0x689d6a'
-#     white:   '0xa89984'
-
-#   # Bright colors
-#   bright:
-#     black:   '0x928374'
-#     red:     '0xfb4934'
-#     green:   '0xb8bb26'
-#     yellow:  '0xfabd2f'
-#     blue:    '0x83a598'
-#     magenta: '0xd3869b'
-#     cyan:    '0x8ec07c'
-#     white:   '0xebdbb2'
 
 schemes:
   everforest_dark_hard: &everforest_dark_hard
@@ -112,72 +80,35 @@ schemes:
       magenta: "#d699b6"
       cyan: "#83c092"
       white: "#d3c6aa"
-  everforest_light_hard: &everforest_light_hard
+  gruvbox: &gruvbox
     primary:
-      background: "#fff9e8"
-      foreground: "#5c6a72"
+      # hard contrast:
+      background: "0x1d2021"
+      # background: '0x282828'
+      # soft contrast: background = '0x32302f'
+      foreground: "0xebdbb2"
+
+    # Normal colors
     normal:
-      black: "#5c6a72"
-      red: "#f85552"
-      green: "#8da101"
-      yellow: "#dfa000"
-      blue: "#3a94c5"
-      magenta: "#df69ba"
-      cyan: "#35a77c"
-      white: "#dfddc8"
+      black: "0x282828"
+      red: "0xcc241d"
+      green: "0x98971a"
+      yellow: "0xd79921"
+      blue: "0x458588"
+      magenta: "0xb16286"
+      cyan: "0x689d6a"
+      white: "0xa89984"
+
+    # Bright colors
     bright:
-      black: "#5c6a72"
-      red: "#f85552"
-      green: "#8da101"
-      yellow: "#dfa000"
-      blue: "#3a94c5"
-      magenta: "#df69ba"
-      cyan: "#35a77c"
-      white: "#dfddc8"
-  everforest_light_medium: &everforest_light_medium
-    primary:
-      background: "#fdf6e3"
-      foreground: "#5c6a72"
-    normal:
-      black: "#5c6a72"
-      red: "#f85552"
-      green: "#8da101"
-      yellow: "#dfa000"
-      blue: "#3a94c5"
-      magenta: "#df69ba"
-      cyan: "#35a77c"
-      white: "#dfddc8"
-    bright:
-      black: "#5c6a72"
-      red: "#f85552"
-      green: "#8da101"
-      yellow: "#dfa000"
-      blue: "#3a94c5"
-      magenta: "#df69ba"
-      cyan: "#35a77c"
-      white: "#dfddc8"
-  everforest_light_soft: &everforest_light_soft
-    primary:
-      background: "#f8f0dc"
-      foreground: "#5c6a72"
-    normal:
-      black: "#5c6a72"
-      red: "#f85552"
-      green: "#8da101"
-      yellow: "#dfa000"
-      blue: "#3a94c5"
-      magenta: "#df69ba"
-      cyan: "#35a77c"
-      white: "#dfddc8"
-    bright:
-      black: "#5c6a72"
-      red: "#f85552"
-      green: "#8da101"
-      yellow: "#dfa000"
-      blue: "#3a94c5"
-      magenta: "#df69ba"
-      cyan: "#35a77c"
-      white: "#dfddc8"
+      black: "0x928374"
+      red: "0xfb4934"
+      green: "0xb8bb26"
+      yellow: "0xfabd2f"
+      blue: "0x83a598"
+      magenta: "0xd3869b"
+      cyan: "0x8ec07c"
+      white: "0xebdbb2"
   one_dark: &one_dark # Default colors
     primary:
       background: "0x282c34"
@@ -260,8 +191,6 @@ schemes:
       magenta: "#d7afaf"
       cyan: "#87afaf"
       white: "#d0d0d0"
-
-    # Bright colors
     bright:
       black: "#626262"
       red: "#d75f87"
@@ -271,69 +200,58 @@ schemes:
       magenta: "#ffafaf"
       cyan: "#87d7d7"
       white: "#e4e4e4"
-  # Tokyo Night theme, based on both:
-  #   https://github.com/ghifarit53/tokyonight-vim
-  #   https://github.com/enkia/tokyo-night-vscode-theme
   tokyo-night: &tokyo-night
-    # Default colors
     primary:
-      background: '0x1a1b26'
-      foreground: '0xa9b1d6'
+      background: "0x1a1b26"
+      foreground: "0xa9b1d6"
 
     # Normal colors
     normal:
-      black:   '0x32344a'
-      red:     '0xf7768e'
-      green:   '0x9ece6a'
-      yellow:  '0xe0af68'
-      blue:    '0x7aa2f7'
-      magenta: '0xad8ee6'
-      cyan:    '0x449dab'
-      white:   '0x787c99'
+      black: "0x32344a"
+      red: "0xf7768e"
+      green: "0x9ece6a"
+      yellow: "0xe0af68"
+      blue: "0x7aa2f7"
+      magenta: "0xad8ee6"
+      cyan: "0x449dab"
+      white: "0x787c99"
 
     # Bright colors
     bright:
-      black:   '0x444b6a'
-      red:     '0xff7a93'
-      green:   '0xb9f27c'
-      yellow:  '0xff9e64'
-      blue:    '0x7da6ff'
-      magenta: '0xbb9af7'
-      cyan:    '0x0db9d7'
-      white:   '0xacb0d0'
+      black: "0x444b6a"
+      red: "0xff7a93"
+      green: "0xb9f27c"
+      yellow: "0xff9e64"
+      blue: "0x7da6ff"
+      magenta: "0xbb9af7"
+      cyan: "0x0db9d7"
+      white: "0xacb0d0"
 
-  tokyo-night-storm: &tokyo-night-storm
-    # Default colors
+  tokyo-night-storm: &tokyo-night-storm # Default colors
     primary:
-      background: '0x24283b'
-      foreground: '0xa9b1d6'
+      background: "0x24283b"
+      foreground: "0xa9b1d6"
 
     # Normal colors
     normal:
-      black:   '0x32344a'
-      red:     '0xf7768e'
-      green:   '0x9ece6a'
-      yellow:  '0xe0af68'
-      blue:    '0x7aa2f7'
-      magenta: '0xad8ee6'
-      cyan:    '0x449dab'
-      white:   '0x9699a8'
+      black: "0x32344a"
+      red: "0xf7768e"
+      green: "0x9ece6a"
+      yellow: "0xe0af68"
+      blue: "0x7aa2f7"
+      magenta: "0xad8ee6"
+      cyan: "0x449dab"
+      white: "0x9699a8"
 
     # Bright colors
     bright:
-      black:   '0x444b6a'
-      red:     '0xff7a93'
-      green:   '0xb9f27c'
-      yellow:  '0xff9e64'
-      blue:    '0x7da6ff'
-      magenta: '0xbb9af7'
-      cyan:    '0x0db9d7'
-      white:   '0xacb0d0'
+      black: "0x444b6a"
+      red: "0xff7a93"
+      green: "0xb9f27c"
+      yellow: "0xff9e64"
+      blue: "0x7da6ff"
+      magenta: "0xbb9af7"
+      cyan: "0x0db9d7"
+      white: "0xacb0d0"
 
 colors: *tokyo-night-storm
-
-cursor:
-  style: 
-    shape: block
-    blinking: Always
-
