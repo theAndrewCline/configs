@@ -32,7 +32,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-writer.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'windwp/nvim-autopairs'
@@ -41,8 +41,8 @@ Plug 'yardnsm/vim-import-cost', { 'do': 'yarn install' }
 call plug#end()
 
 set number
-" set colorcolumn=80
-" set cursorline
+set colorcolumn=80
+set cursorline
 set foldmethod=indent
 set foldlevel=99 " all folds open by default
 set inccommand=split " show a preview of the changes by norm command
@@ -105,9 +105,10 @@ nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
 let g:which_key_map =  {
-        \ 'p': [':Telescope find_files', 'Search Files'],
+        \ 'p': [':Telescope git_files', 'Search Files'],
         \ 'a': [':Lspsaga code_action', 'Code Action'],
-        \ 's': [':Rg', 'Search'],
+        \ 's': [':Telescope grep_string', 'Search'],
+        \ 't': [':Telescope', 'Telescope'],
         \ 'd': [":Telescope lsp_workspace_diagnostics", "Code Diagnostics"],
         \ 'g': {
                   \ "name": "Git actions",
@@ -133,24 +134,20 @@ nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-" nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-" nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 set completeopt=menuone,noselect
 nnoremap <silent> gs :Lspsaga signature_help<CR>
 
 let g:prettier#autoformat = 1
-" let g:prettier#autoformat_config_present = 1
 let g:prettier#autoformat_require_pragma = 0
 
 " LUA STUFF "
 
-lua << EOF
-require('lspconfig').tsserver.setup{}
-require('lspconfig').svelte.setup{}
-require('lspconfig').vuels.setup{}
-require('lspconfig').graphql.setup{}
+lua require('mylspconfig')
 
+lua << EOF
 require("trouble").setup {}
 
 require('lspsaga').init_lsp_saga()
@@ -189,28 +186,47 @@ require('compe').setup {
   };
 }
 
+require("nvim-autopairs.completion.compe").setup({
+  map_cr = true, --  map <CR> on insert mode
+  map_complete = true, -- it will auto insert `(` after select function or method item
+  auto_select = false,  -- auto select first item
+})
+
 require('nvim-autopairs').setup {}
 
 require('gitsigns').setup {
   current_line_blame = true,
 }
 
---[[ require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = { }, -- List of parsers to ignore installing
+--[[
+require'nvim-treesitter.configs'.setup {
   highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "c" },  -- list of language that will be disabled
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
+    enable = true,
+    disable = {},
+  },
+  indent = {
+    enable = false,
+    disable = {},
+  },
+  ensure_installed = {
+    "tsx",
+    "toml",
+    "json",
+    "yaml",
+    "html",
+    "scss",
+    "css"
   },
 }
---]]
+]]--
+
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
 
 require'nvim-web-devicons'.setup {
  default = true;
 }
 EOF
+
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <TAB>     compe#confirm('<CR>')
