@@ -33,7 +33,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-writer.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'projekt0n/circles.nvim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'windwp/nvim-autopairs'
 Plug 'yardnsm/vim-import-cost', { 'do': 'yarn install' }
@@ -140,9 +140,6 @@ nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 set completeopt=menuone,noselect
 nnoremap <silent> gs :Lspsaga signature_help<CR>
 
-let g:prettier#autoformat = 1
-let g:prettier#autoformat_require_pragma = 0
-
 " LUA STUFF "
 
 lua require('mylspconfig')
@@ -198,34 +195,18 @@ require('gitsigns').setup {
   current_line_blame = true,
 }
 
---[[
 require'nvim-treesitter.configs'.setup {
   highlight = {
-    enable = true,
-    disable = {},
-  },
-  indent = {
-    enable = false,
-    disable = {},
-  },
-  ensure_installed = {
-    "tsx",
-    "toml",
-    "json",
-    "yaml",
-    "html",
-    "scss",
-    "css"
-  },
+    enable = true
+  }
 }
-]]--
-
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
 
 require'nvim-web-devicons'.setup {
  default = true;
 }
+
+require("circles").setup()
+
 EOF
 
 inoremap <silent><expr> <C-Space> compe#complete()
