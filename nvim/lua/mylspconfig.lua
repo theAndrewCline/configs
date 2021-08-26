@@ -2,6 +2,7 @@ require('lspconfig').tsserver.setup{}
 require('lspconfig').svelte.setup{}
 require('lspconfig').vuels.setup{}
 require('lspconfig').graphql.setup{}
+require('lspconfig').vls.setup{}
 
 local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_formatting then
@@ -15,7 +16,20 @@ end
 
 require('lspconfig').diagnosticls.setup {
   on_attach = on_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
+  filetypes = { 
+    'javascript',
+    'javascriptreact',
+    'json',
+    'typescript',
+    'typescriptreact',
+    'css',
+    'less',
+    'scss',
+    'markdown',
+    'pandoc',
+    'vue',
+    'graphql'
+  },
   init_options = {
     formatters = {
       prettier = {
@@ -34,6 +48,8 @@ require('lspconfig').diagnosticls.setup {
       typescriptreact = 'prettier',
       json = 'prettier',
       markdown = 'prettier',
+      vue = 'prettier',
+      graphql = 'prettier'
     }
   }
 }
