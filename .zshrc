@@ -101,3 +101,5 @@ export PATH=~/.scripts:$PATH
 
 export FZF_DEFAULT_COMMAND="rg --files"
 # eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="/usr/local/opt/php@7.4/bin:$PATH"
+export PATH="/usr/local/opt/php@7.4/sbin:$PATH"

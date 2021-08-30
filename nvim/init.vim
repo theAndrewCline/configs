@@ -20,7 +20,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'ghifarit53/tokyonight-vim'
-
+Plug 'junegunn/seoul256.vim'
 " TESTING
 Plug 'folke/lsp-colors.nvim'
 Plug 'folke/trouble.nvim'
@@ -38,9 +38,11 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'windwp/nvim-autopairs'
 Plug 'yardnsm/vim-import-cost', { 'do': 'yarn install' }
 
+Plug 'ThePrimeagen/vim-be-good' 
+
 call plug#end()
 
-set number
+set nu rnu
 set colorcolumn=80
 set cursorline
 set foldmethod=indent
@@ -68,10 +70,12 @@ endif
 set termguicolors
 set background=dark
 
+let g:seoul256_background = 235
+
 let g:tokyonight_style = 'storm' " available: night, storm
 let g:tokyonight_enable_italic = 1
 
-colorscheme tokyonight
+colorscheme seoul256
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -134,8 +138,8 @@ nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 set completeopt=menuone,noselect
 nnoremap <silent> gs :Lspsaga signature_help<CR>

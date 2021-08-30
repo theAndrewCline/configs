@@ -3,6 +3,7 @@ require('lspconfig').svelte.setup{}
 require('lspconfig').vuels.setup{}
 require('lspconfig').graphql.setup{}
 require('lspconfig').vls.setup{}
+require'lspconfig'.phpactor.setup{}
 
 local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_formatting then
@@ -16,7 +17,7 @@ end
 
 require('lspconfig').diagnosticls.setup {
   on_attach = on_attach,
-  filetypes = { 
+  filetypes = {
     'javascript',
     'javascriptreact',
     'json',
