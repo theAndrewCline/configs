@@ -5,7 +5,7 @@ wk.register({
   [";"] = { ":Telescope buffers<cr>", "List Buffers" },
   a = { ':Lspsaga code_action<cr>', 'Code Action' },
   s = { ':Telescope grep_string<cr>', 'Search' },
-  t = { ':Telescope<cr>', 'Telescope<cr>' },
+  t = { ':Telescope<cr>', 'Telescope' },
   d = { ":Telescope lsp_workspace_diagnostics<cr>", "Code Diagnostics"},
   u = {  ":so $MYVIMRC<cr>", "Refresh vimrc" },
   f = { ":Goyo<cr>", "Focus Mode" },
