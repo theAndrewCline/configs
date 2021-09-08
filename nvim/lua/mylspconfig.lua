@@ -14,6 +14,15 @@ local on_attach = function(client, bufnr)
   end
 end
 
+local function organize_imports()
+  local params = {
+    command = "_typescript.organizeImports",
+    arguments = {vim.api.nvim_buf_get_name(0)},
+    title = ""
+  }
+
+  vim.lsp.buf.execute_command(params)
+end
 
 require('lspconfig').diagnosticls.setup {
   on_attach = on_attach,
@@ -30,6 +39,12 @@ require('lspconfig').diagnosticls.setup {
     'pandoc',
     'vue',
     'graphql'
+  },
+  commands = {
+    OrganizeImports = {
+      organize_imports,
+      description = "Organize Imports"
+    }
   },
   init_options = {
     formatters = {
