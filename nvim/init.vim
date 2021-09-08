@@ -1,46 +1,4 @@
-" TODO: add binding for jumping to definition
-"
-call plug#begin('~/.vim/plugged')
-
-Plug 'Yggdroot/indentLine'
-Plug 'edkolev/tmuxline.vim'
-Plug 'jparise/vim-graphql'
-" Plug 'junegunn/fzf'
-" Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'liuchengxu/vim-which-key'
-" TESTING Native LSP
-" Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': 'yarn install --frozen-lockfile' }
-" Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-airline/vim-airline'
-Plug 'ghifarit53/tokyonight-vim'
-Plug 'junegunn/seoul256.vim'
-" TESTING
-Plug 'folke/lsp-colors.nvim'
-Plug 'folke/trouble.nvim'
-Plug 'glepnir/lspsaga.nvim'
-Plug 'hrsh7th/nvim-compe' 
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'neovim/nvim-lspconfig' 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope-fzf-writer.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'projekt0n/circles.nvim'
-Plug 'ryanoasis/vim-devicons'
-Plug 'windwp/nvim-autopairs'
-Plug 'yardnsm/vim-import-cost', { 'do': 'yarn install' }
-
-Plug 'ThePrimeagen/vim-be-good' 
-
-call plug#end()
+lua require('plugins')
 
 set nu rnu
 set colorcolumn=80
@@ -53,7 +11,7 @@ set encoding=utf-8
 set ruler
 set conceallevel=0 " so I can see ` in markdown files
 set updatetime=300 " faster completions
-set timeoutlen=100 " faster timeout
+set timeoutlen=500
 set smarttab
 set expandtab
 set tabstop=2 " 2 spaces for tab
@@ -61,12 +19,6 @@ set shiftwidth=2
 
 "### SYNTAX AND COLOR SETTINGS ###
 syntax on
-if exists('+termguicolors')
-  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-
 set termguicolors
 set background=dark
 
@@ -105,28 +57,9 @@ let g:mapleader = "\<Space>"
 
 " nnoremap - :Telescope file_browser<CR>
 
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+" nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+" vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
-let g:which_key_map =  {
-        \ 'p': [':Telescope git_files', 'Search Files'],
-        \ 'a': [':Lspsaga code_action', 'Code Action'],
-        \ 's': [':Telescope grep_string', 'Search'],
-        \ 't': [':Telescope', 'Telescope'],
-        \ 'd': [":Telescope lsp_workspace_diagnostics", "Code Diagnostics"],
-        \ 'g': {
-                  \ "name": "Git actions",
-                  \ "c": [":Git commit", "Git Commit"],
-                  \ "s": [":G", "Git Status"],
-                  \ "p": [":Git pull", "Git Pull"],
-                  \ "P": [":Git push", "Git Push"],
-          \ },
-        \ 'u': [ ":so $MYVIMRC", "Refresh vimrc" ],
-        \ "f": [":Goyo", "Focus Mode"],
-        \ ";": [":Telescope buffers", "List Buffers"] 
-        \ }
-
-call which_key#register("<SPACE>", "g:which_key_map")
 
 "##############################
 "###     TESTING CONFIG     ###
@@ -147,6 +80,7 @@ nnoremap <silent> gs :Lspsaga signature_help<CR>
 " LUA STUFF "
 
 lua require('mylspconfig')
+lua require('which-key-config')
 
 lua << EOF
 require("trouble").setup {}
