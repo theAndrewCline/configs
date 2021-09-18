@@ -30,6 +30,14 @@ the setup script included will simply link config files and folders to the appro
 
 This part of the documentation will be a WIP for a bit.
 
+### nvim
+
+The most helpful part of my config is which key, which you can open by hitting your leader key (`SPACE` if you have not remapped it).
+
+This will show a list of my most used commands that I have mapped to easy keys that I can remember
+
+See the which-key-config lua file in the nvim folder to make it was you want it to be.
+
 ## Help
 
 Please submit an issue if you need help, I would love to help.
