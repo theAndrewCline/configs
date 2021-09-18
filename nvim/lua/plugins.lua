@@ -23,7 +23,14 @@ return require('packer').startup(function()
 
   use 'jparise/vim-graphql'
 
-  use 'junegunn/goyo.vim'
+  -- use 'junegunn/goyo.vim'
+
+  use {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {}
+    end
+  }
 
   use 'tpope/vim-commentary'
 

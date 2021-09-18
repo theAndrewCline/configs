@@ -34,4 +34,5 @@ vim.opt.completeopt='menuone,noselect'
 vim.opt.rtp = vim.opt.rtp + '~/.fzf'
 vim.opt.grepprg="rg\\ -S\\ --vimgrep"
 
+vim.cmd[[syntax on]]
 vim.cmd[[colorscheme tokyonight]]
