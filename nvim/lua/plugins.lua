@@ -9,9 +9,17 @@ end
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
-  use 'Yggdroot/indentLine'
-
-  use 'edkolev/tmuxline.vim'
+  use { 
+    "lukas-reineke/indent-blankline.nvim",
+    config = function() 
+      require("indent_blankline").setup {
+        space_char_blankline = " ",
+        show_current_context = true,
+        char = "|",
+        buftype_exclude = {"terminal"}
+      }
+    end
+  }
 
   use 'jparise/vim-graphql'
 
@@ -27,21 +35,20 @@ return require('packer').startup(function()
 
   use 'tpope/vim-vinegar'
 
-  use 'vim-airline/vim-airline-themes'
-  use 'vim-airline/vim-airline'
 
-  -- use {
-  --   'glepnir/galaxyline.nvim',
-  --     branch = 'main',
-  --     -- your statusline
-  --     config = function() require'mystatusline' end,
-  --     -- some optional icons
-  --     requires = {'kyazdani42/nvim-web-devicons', opt = true}
-  -- }
+  use {
+    'hoob3rt/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    config = function()
+      require('lualine').setup({
+        options = {
+          theme = 'tokyonight'
+        }
+      })
+    end
+  }
 
-  use 'ghifarit53/tokyonight-vim'
-
-  use 'junegunn/seoul256.vim'
+  use 'folke/tokyonight.nvim'
 
   use 'folke/lsp-colors.nvim'
 
@@ -58,6 +65,8 @@ return require('packer').startup(function()
       require('lspsaga').init_lsp_saga()
     end
   }
+
+  use 'sirver/ultisnips'
 
   use {
     'hrsh7th/nvim-compe',
@@ -90,9 +99,7 @@ return require('packer').startup(function()
           calc = true;
           nvim_lsp = true;
           nvim_lua = true;
-          -- vsnip = true;
-          -- ultisnips = true;
-          -- luasnip = true;
+          ultisnips = true;
         };
       }
     end
@@ -140,13 +147,6 @@ return require('packer').startup(function()
       }
     end
  
-  }
-
-  use {
-    'projekt0n/circles.nvim',
-    config = function() 
-      require("circles").setup()
-    end
   }
 
   use 'ryanoasis/vim-devicons'
