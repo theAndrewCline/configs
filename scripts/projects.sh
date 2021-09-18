@@ -11,7 +11,7 @@ tmux has-session -t=$git_repo 2> /dev/null
 
 # 2. Create the session if it doesn't exists.
 if [[ $? -ne 0 ]]; then
-  TMUX='' tmux new-session -d -s "$git_repo"
+  TMUX='' tmux new-session -d -s "$git_repo" -c ~/code/$git_repo
 fi
 
 # 3. Attach if outside of tmux, switch if you're in tmux.
