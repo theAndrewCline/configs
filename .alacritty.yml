@@ -6,7 +6,7 @@ window:
 
 font:
   normal:
-    family: "FiraMono Nerd Font"
+    family: "Hack Nerd Font"
     style: Regular
   # normal screen
   # size: 13
@@ -254,4 +254,4 @@ schemes:
       cyan: "0x0db9d7"
       white: "0xacb0d0"
 
-colors: *seoul_256
+colors: *tokyo-night-storm

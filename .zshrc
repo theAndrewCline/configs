@@ -96,6 +96,7 @@ export EDITOR='nvim'
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.local/flutter/bin
 export PATH=~/.scripts:$PATH
+export PATH=~/configs/scripts:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
