@@ -38,7 +38,8 @@ require('lspconfig').diagnosticls.setup {
     'markdown',
     'pandoc',
     'vue',
-    'graphql'
+    'graphql',
+    'php'
   },
   commands = {
     OrganizeImports = {
