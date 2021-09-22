@@ -21,10 +21,10 @@ you will need to install
 
 the setup script included will simply link config files and folders to the appropriate places
 
-1.) - Install the above dependancies
-2.) - Clone the repo to your home folder
-3.) - run `cd configs && ./setup.sh`
-4.) - open neovim (should be `nvim`) and run `:PackerSync` this will install all neovim plugins - Packer is bootstrapped inside the neovim config so the first time you open neovim it should download and install Packer for you
+- 1.)  Install the above dependancies
+- 2.) Clone the repo to your home folder
+- 3.) run `cd configs && ./setup.sh`
+- 4.) open neovim (should be `nvim`) and run `:PackerSync` this will install all neovim plugins - Packer is bootstrapped inside the neovim config so the first time you open neovim it should download and install Packer for you
 
 ## Using
 
