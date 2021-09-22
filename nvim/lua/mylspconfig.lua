@@ -3,7 +3,7 @@ require('lspconfig').svelte.setup{}
 require('lspconfig').vuels.setup{}
 require('lspconfig').graphql.setup{}
 require('lspconfig').vls.setup{}
-require'lspconfig'.phpactor.setup{}
+require'lspconfig'.intelephense.setup{}
 
 local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_formatting then
@@ -39,6 +39,7 @@ require('lspconfig').diagnosticls.setup {
     'pandoc',
     'vue',
     'graphql',
+    'lua',
     'php'
   },
   commands = {
@@ -52,6 +53,10 @@ require('lspconfig').diagnosticls.setup {
       prettier = {
         command = 'prettier',
         args = { '--stdin-filepath', '%filename' }
+      },
+      luafmt = {
+        command = 'luafmt',
+        args = {}
       }
     },
     formatFiletypes = {
@@ -66,7 +71,8 @@ require('lspconfig').diagnosticls.setup {
       json = 'prettier',
       markdown = 'prettier',
       vue = 'prettier',
-      graphql = 'prettier'
+      graphql = 'prettier',
+      lua = 'luafmt'
     }
   }
 }

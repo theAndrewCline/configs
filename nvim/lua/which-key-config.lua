@@ -4,7 +4,7 @@ wk.register({
   p = { ':Telescope git_files<cr>', 'Search Files' },
   [";"] = { ":Telescope buffers<cr>", "List Buffers" },
   a = { ':Lspsaga code_action<cr>', 'Code Action' },
-  s = { ':Telescope grep_string<cr>', 'Search' },
+  s = { ':Telescope live_grep<cr>', 'Search' },
   S = { ':PackerSync<cr>', 'Update Plugins' },
   t = { ':Telescope<cr>', 'Telescope' },
   d = { ":Telescope lsp_workspace_diagnostics<cr>", "Code Diagnostics"},

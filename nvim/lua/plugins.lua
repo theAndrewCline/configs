@@ -28,7 +28,11 @@ return require('packer').startup(function()
   use {
     "folke/zen-mode.nvim",
     config = function()
-      require("zen-mode").setup {}
+      require("zen-mode").setup {
+        plugins = {
+          tmux = { enabled = false }
+        }
+      }
     end
   }
 
@@ -42,6 +46,7 @@ return require('packer').startup(function()
 
   use 'tpope/vim-vinegar'
 
+  use 'tpope/vim-dadbod'
 
   use {
     'hoob3rt/lualine.nvim',
@@ -139,6 +144,10 @@ return require('packer').startup(function()
     end
   } 
 
+  use {
+      'williamboman/nvim-lsp-installer',
+  }
+
   use 'nvim-lua/plenary.nvim'
 
   use 'nvim-telescope/telescope-fzf-writer.nvim'
@@ -150,15 +159,26 @@ return require('packer').startup(function()
     run = ':TSUpdate',
     config = function()
       require'nvim-treesitter.configs'.setup {
-        highlight = {
-          enable = true
-        }
+        autopairs = { enable = true },
+        indent = { enable = true },
+        highlight = { enable = true }
       }
     end
  
   }
 
   use 'ryanoasis/vim-devicons'
+
+  use {
+    'windwp/nvim-ts-autotag',
+    config = function() 
+      require('nvim-ts-autotag').setup {
+        filetypes = {
+          'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'php'
+        },
+      }
+    end
+  }
 
   use {
     'windwp/nvim-autopairs',

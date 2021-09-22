@@ -63,5 +63,5 @@ map('n', '<silent>', '<C-n> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>', { nore
 
 map('n', '<silent> gs :Lspsaga signature_hel', '<CR>', { noremap = true })
 
-map('i', '<silent><expr> <C-Space>', 'compe#complete()', { noremap = true }) 
-map('i', '<silent><expr> <TAB>', "compe#confirm('<CR>')", { noremap = true })
+-- map('i', '<silent><expr> <C-Space>', 'compe#complete()', { noremap = true }) 
+-- map('i', '<silent><expr> <TAB>', "compe#confirm('<CR>')", { noremap = true })
