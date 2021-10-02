@@ -1,17 +1,14 @@
 window:
-  decorations: "full"
+  decorations: "none"
   padding:
     x: 10
     y: 10
 
 font:
   normal:
-    family: "Hack Nerd Font"
+    family: "SauceCodePro Nerd Font"
     style: Regular
-  # normal screen
-  # size: 13
-  # retina display
-  size: 15
+  size: 17
 
 schemes:
   everforest_dark_hard: &everforest_dark_hard
@@ -254,4 +251,4 @@ schemes:
       cyan: "0x0db9d7"
       white: "0xacb0d0"
 
-colors: *tokyo-night-storm
+colors: *gruvbox

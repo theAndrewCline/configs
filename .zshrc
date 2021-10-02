@@ -97,10 +97,10 @@ export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.local/flutter/bin
 export PATH=~/.scripts:$PATH
 export PATH=~/configs/scripts:$PATH
+export PATH=~/go/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND="rg --files"
-# eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/usr/local/opt/php@7.4/bin:$PATH"
 export PATH="/usr/local/opt/php@7.4/sbin:$PATH"

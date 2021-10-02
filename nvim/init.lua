@@ -34,5 +34,7 @@ vim.opt.completeopt='menuone,noselect'
 vim.opt.rtp = vim.opt.rtp + '~/.fzf'
 vim.opt.grepprg="rg\\ -S\\ --vimgrep"
 
+vim.o.background = "dark"
 vim.cmd[[syntax on]]
-vim.cmd[[colorscheme tokyonight]]
+vim.api.nvim_set_var('gruvbox_contrast_dark', 'hard')
+vim.cmd[[colorscheme gruvbox]]

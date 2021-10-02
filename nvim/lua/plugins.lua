@@ -23,8 +23,6 @@ return require('packer').startup(function()
 
   use 'jparise/vim-graphql'
 
-  -- use 'junegunn/goyo.vim'
-
   use {
     "folke/zen-mode.nvim",
     config = function()
@@ -33,6 +31,22 @@ return require('packer').startup(function()
           tmux = { enabled = false }
         }
       }
+    end
+  }
+
+  use { 
+    'folke/twilight.nvim',
+    config = function()
+      require("twilight").setup {}
+    end
+
+  }
+
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {}
     end
   }
 
@@ -54,13 +68,22 @@ return require('packer').startup(function()
     config = function()
       require('lualine').setup({
         options = {
-          theme = 'tokyonight'
+          theme = 'gruvbox',
+          section_separators = '',
+          component_separators = ''
         }
       })
     end
   }
 
   use 'folke/tokyonight.nvim'
+
+  use 'shaunsingh/seoul256.nvim'
+
+  use {
+    "ellisonleao/gruvbox.nvim",
+    requires = { "rktjmp/lush.nvim" }
+  }
 
   use 'folke/lsp-colors.nvim'
 

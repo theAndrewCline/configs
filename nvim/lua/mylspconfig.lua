@@ -4,6 +4,7 @@ require('lspconfig').vuels.setup{}
 require('lspconfig').graphql.setup{}
 require('lspconfig').vls.setup{}
 require'lspconfig'.intelephense.setup{}
+require'lspconfig'.gopls.setup{}
 
 local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_formatting then
@@ -40,7 +41,9 @@ require('lspconfig').diagnosticls.setup {
     'vue',
     'graphql',
     'lua',
-    'php'
+    'html',
+    'go'
+    -- 'php'
   },
   commands = {
     OrganizeImports = {
@@ -66,13 +69,15 @@ require('lspconfig').diagnosticls.setup {
       json = 'prettier',
       scss = 'prettier',
       less = 'prettier',
+      html = 'prettier',
       typescript = 'prettier',
       typescriptreact = 'prettier',
       json = 'prettier',
       markdown = 'prettier',
       vue = 'prettier',
       graphql = 'prettier',
-      lua = 'luafmt'
+      lua = 'luafmt',
+      go = 'gofmt'
     }
   }
 }
