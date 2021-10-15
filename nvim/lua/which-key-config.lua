@@ -10,6 +10,7 @@ wk.register({
   d = { ":Telescope lsp_workspace_diagnostics<cr>", "Code Diagnostics"},
   u = {  ":so $MYVIMRC<cr>", "Refresh vimrc" },
   f = { ":ZenMode<cr>", "Zen Mode" },
+  b = { ":Telescope file_browser<cr>", "Browse Files" },
   g = {
     name = 'Git Actions',
     c = { ':Git commit<cr>', 'Git Commit' },

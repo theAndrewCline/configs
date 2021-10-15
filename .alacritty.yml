@@ -1,5 +1,7 @@
+background_opacity: 0.95
+
 window:
-  decorations: "none"
+  # decorations: "none"
   padding:
     x: 10
     y: 10
@@ -279,4 +281,4 @@ schemes:
       cyan:    '0xa3f7ff'
       white:   '0xffffff'
 
-colors: *palenight
+colors: *tokyo-night-storm

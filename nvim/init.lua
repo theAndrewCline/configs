@@ -37,4 +37,7 @@ vim.opt.grepprg="rg\\ -S\\ --vimgrep"
 vim.o.background = "dark"
 vim.cmd[[syntax on]]
 -- vim.api.nvim_set_var('gruvbox_contrast_dark', 'hard')
-vim.cmd[[colorscheme palenight]]
+vim.cmd[[colorscheme tokyonight]]
+
+vim.cmd[[highlight Normal guibg=none]]
+vim.cmd[[highlight NonText guibg=none]]

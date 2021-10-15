@@ -37,7 +37,8 @@ return require('packer').startup(function()
   use { 
     'folke/twilight.nvim',
     config = function()
-      require("twilight").setup {}
+      -- doesn't work with opacity lowered
+      -- require("twilight").setup {}
     end
 
   }
@@ -51,15 +52,10 @@ return require('packer').startup(function()
   }
 
   use 'tpope/vim-commentary'
-
   use 'tpope/vim-fugitive'
-
   use 'tpope/vim-repeat'
-
   use 'tpope/vim-surround'
-
   use 'tpope/vim-vinegar'
-
   use 'tpope/vim-dadbod'
 
   use {
@@ -88,7 +84,6 @@ return require('packer').startup(function()
   use 'drewtempelmeyer/palenight.vim'
 
   use 'folke/lsp-colors.nvim'
-
   use { 
     'folke/trouble.nvim',
     config = function()
@@ -107,42 +102,51 @@ return require('packer').startup(function()
     'L3MON4D3/LuaSnip',
   }
 
+  use { 'hrsh7th/cmp-nvim-lsp' }
+  use { 'hrsh7th/cmp-buffer' }
   use {
-    'hrsh7th/nvim-compe',
-    config = function()
-      require('compe').setup { 
-        enabled = true,
-        autocomplete = true,
-        debug = false,
-        min_length = 1,
-        preselect = 'enable',
-        throttle_time = 80,
-        source_timeout = 200,
-        resolve_timeout = 800,
-        incomplete_delay = 400,
-        max_abbr_width = 100,
-        max_kind_width = 100,
-        max_menu_width = 100,
-        documentation = {
-          border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-          winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-          max_width = 120,
-          min_width = 60,
-          max_height = math.floor(vim.o.lines * 0.3),
-          min_height = 1,
-        },
+   'hrsh7th/nvim-cmp',
+   config = function() 
 
-        source = {
-          path = true,
-          buffer = true,
-          calc = true,
-          nvim_lsp = true,
-          nvim_lua = true,
-          lua_snip = true,
-        },
+    local cmp = require('cmp')
+
+    cmp.setup({
+      snippet = {
+        expand = function(args)
+          -- For `vsnip` user.
+          -- vim.fn["vsnip#anonymous"](args.body)
+
+          -- For `luasnip` user.
+          require('luasnip').lsp_expand(args.body)
+
+          -- For `ultisnips` user.
+          -- vim.fn["UltiSnips#Anon"](args.body)
+        end,
+      },
+      mapping = {
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<TAB>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      },
+      sources = {
+        { name = 'nvim_lsp' },
+
+        -- For vsnip user.
+        -- { name = 'vsnip' },
+
+        -- For luasnip user.
+        -- { name = 'luasnip' },
+
+        -- For ultisnips user.
+        -- { name = 'ultisnips' },
+
+        { name = 'buffer' },
       }
-    end
-    }
+    })
+   end
+  }
 
   use {
     'kyazdani42/nvim-web-devicons',
@@ -177,7 +181,19 @@ return require('packer').startup(function()
 
   use 'nvim-telescope/telescope-fzf-writer.nvim'
 
-  use 'nvim-telescope/telescope.nvim'
+  use { 
+    'nvim-telescope/telescope.nvim',
+    config = function()
+      require('telescope').setup {
+        pickers = {
+          file_browser = {
+            initial_mode = 'normal'
+          }
+        }
+
+      }
+    end
+  }
 
   use { 
     'nvim-treesitter/nvim-treesitter',
@@ -210,10 +226,15 @@ return require('packer').startup(function()
     config = function() 
       require('nvim-autopairs').setup {}
 
-      require("nvim-autopairs.completion.compe").setup({
+      require("nvim-autopairs.completion.cmp").setup({
         map_cr = true, --  map <CR> on insert mode
-        map_complete = true, -- it will auto insert `(` after select function or method item
-        auto_select = false,  -- auto select first item
+        map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
+        auto_select = true, -- automatically select the first item
+        insert = false, -- use insert confirm behavior instead of replace
+        map_char = { -- modifies the function or method delimiter by filetypes
+          all = '(',
+          tex = '{'
+        }
       })
     end
   }
