@@ -68,7 +68,7 @@ return require('packer').startup(function()
     config = function()
       require('lualine').setup({
         options = {
-          theme = 'gruvbox',
+          theme = 'palenight',
           section_separators = '',
           component_separators = ''
         }
@@ -84,6 +84,8 @@ return require('packer').startup(function()
     "ellisonleao/gruvbox.nvim",
     requires = { "rktjmp/lush.nvim" }
   }
+
+  use 'drewtempelmeyer/palenight.vim'
 
   use 'folke/lsp-colors.nvim'
 
