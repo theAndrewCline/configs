@@ -104,6 +104,7 @@ return require('packer').startup(function()
 
   use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-buffer' }
+  use { 'hrsh7th/cmp-path' }
   use {
    'hrsh7th/nvim-cmp',
    config = function() 
@@ -126,7 +127,7 @@ return require('packer').startup(function()
       mapping = {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<TAB>'] = cmp.mapping.complete(),
+        -- ['<TAB>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
       },

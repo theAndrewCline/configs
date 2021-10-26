@@ -15,6 +15,15 @@ require('lspconfig').graphql.setup{}
 require('lspconfig').vls.setup{}
 require'lspconfig'.intelephense.setup{}
 require'lspconfig'.gopls.setup{}
+require'lspconfig'.rust_analyzer.setup{
+  settings = {
+    ["rust_analyzer"] = {
+      checkOnSave = {
+        command = "clippy"
+      }
+    }
+  }
+}
 
 local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_formatting then
@@ -52,7 +61,8 @@ require('lspconfig').diagnosticls.setup {
     'graphql',
     'lua',
     'html',
-    'go'
+    'go',
+    'rust'
     -- 'php'
   },
   commands = {
@@ -87,7 +97,8 @@ require('lspconfig').diagnosticls.setup {
       vue = 'prettier',
       graphql = 'prettier',
       lua = 'luafmt',
-      go = 'gofmt'
+      go = 'gofmt',
+      rust = 'rustfmt'
     }
   }
 }
