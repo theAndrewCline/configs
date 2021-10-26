@@ -41,3 +41,6 @@ vim.cmd[[colorscheme tokyonight]]
 
 vim.cmd[[highlight Normal guibg=none]]
 vim.cmd[[highlight NonText guibg=none]]
+
+require("luasnip/loaders/from_vscode").load({ paths = { "~/configs/nvim/snips" } })
+require("luasnip/loaders/from_vscode").lazy_load() 

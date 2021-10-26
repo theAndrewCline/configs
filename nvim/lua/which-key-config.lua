@@ -11,6 +11,8 @@ wk.register({
   u = {  ":so $MYVIMRC<cr>", "Refresh vimrc" },
   f = { ":ZenMode<cr>", "Zen Mode" },
   b = { ":Telescope file_browser<cr>", "Browse Files" },
+  j = { ":cn<CR>", "Next in quick fix"},
+  k = { ":cp<CR>", "Previous in quick fix"},
   g = {
     name = 'Git Actions',
     c = { ':Git commit<cr>', 'Git Commit' },
