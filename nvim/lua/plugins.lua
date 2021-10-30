@@ -37,8 +37,7 @@ return require('packer').startup(function()
   use { 
     'folke/twilight.nvim',
     config = function()
-      -- doesn't work with opacity lowered
-      -- require("twilight").setup {}
+      require("twilight").setup {}
     end
 
   }
@@ -64,7 +63,7 @@ return require('packer').startup(function()
     config = function()
       require('lualine').setup({
         options = {
-          theme = 'palenight',
+          theme = 'ayu',
           section_separators = '',
           component_separators = ''
         }
@@ -72,16 +71,12 @@ return require('packer').startup(function()
     end
   }
 
-  use 'folke/tokyonight.nvim'
-
-  use 'shaunsingh/seoul256.nvim'
-
-  use {
-    "ellisonleao/gruvbox.nvim",
-    requires = { "rktjmp/lush.nvim" }
+  use { 
+    'shatur/neovim-ayu',
+    config = function() 
+      require('ayu').colorscheme()
+    end
   }
-
-  use 'drewtempelmeyer/palenight.vim'
 
   use 'folke/lsp-colors.nvim'
   use { 
@@ -214,17 +209,6 @@ return require('packer').startup(function()
     'windwp/nvim-autopairs',
     config = function() 
       require('nvim-autopairs').setup {}
-
-      require("nvim-autopairs.completion.cmp").setup({
-        map_cr = true, --  map <CR> on insert mode
-        map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-        auto_select = true, -- automatically select the first item
-        insert = false, -- use insert confirm behavior instead of replace
-        map_char = { -- modifies the function or method delimiter by filetypes
-          all = '(',
-          tex = '{'
-        }
-      })
     end
   }
   
