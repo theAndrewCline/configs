@@ -53,13 +53,14 @@ return require('packer').startup(function()
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true},
     config = function()
-      require('lualine').setup({
-        options = {
-          theme = 'ayu',
-          section_separators = '',
-          component_separators = ''
-        }
-      })
+      -- require('lualine').setup({
+      --   options = {
+      --     theme = 'ayu',
+      --     section_separators = '',
+      --     component_separators = ''
+      --   }
+      -- })
+      require('bubbleline')
     end
   }
 
@@ -208,6 +209,15 @@ return require('packer').startup(function()
       require('which-key-config')
     end
   }
+
+  -- use {
+  --   'glepnir/galaxyline.nvim',
+  --     branch = 'main',
+  --     -- your statusline
+  --     config = function() require'superline' end,
+  --     -- some optional icons
+  --     requires = {'kyazdani42/nvim-web-devicons', opt = true}
+  -- }
 
   use 'christoomey/vim-tmux-navigator'
 end)
