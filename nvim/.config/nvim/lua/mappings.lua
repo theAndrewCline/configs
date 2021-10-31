@@ -4,7 +4,10 @@ local cmd = vim.cmd
 local default_opts = {noremap = true, silent = true}
 
 map('n', '<Space>', '', {})
+
 vim.g.mapleader = ' '
+
+map('n', '<leader><leader>', '<C-^>', { silent = true, noremap = true})
 
 -- move around splits using Ctrl + {h,j,k,l}
 map('n', '<C-h>', '<C-w>h', default_opts)
