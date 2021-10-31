@@ -34,14 +34,6 @@ return require('packer').startup(function()
     end
   }
 
-  use { 
-    'folke/twilight.nvim',
-    config = function()
-      require("twilight").setup {}
-    end
-
-  }
-
   use {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
@@ -135,6 +127,7 @@ return require('packer').startup(function()
    end
   }
 
+  use 'ryanoasis/vim-devicons'
   use {
     'kyazdani42/nvim-web-devicons',
     config = function()
@@ -155,19 +148,11 @@ return require('packer').startup(function()
 
   use { 
     'neovim/nvim-lspconfig',
-    config = function() 
-      require('mylspconfig')
-    end
+    config = function() require('mylspconfig') end 
   } 
 
-  use {
-      'williamboman/nvim-lsp-installer',
-  }
-
   use 'nvim-lua/plenary.nvim'
-
   use 'nvim-telescope/telescope-fzf-writer.nvim'
-
   use { 
     'nvim-telescope/telescope.nvim',
     config = function()
@@ -192,10 +177,7 @@ return require('packer').startup(function()
         highlight = { enable = true }
       }
     end
- 
   }
-
-  use 'ryanoasis/vim-devicons'
 
   use {
     'windwp/nvim-ts-autotag',
@@ -226,6 +208,7 @@ return require('packer').startup(function()
       require('which-key-config')
     end
   }
+
   use 'christoomey/vim-tmux-navigator'
 end)
 

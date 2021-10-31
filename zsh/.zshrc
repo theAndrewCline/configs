@@ -106,3 +106,7 @@ export PATH=~/go/bin:$PATH
 export FZF_DEFAULT_COMMAND="rg --files"
 export PATH="/usr/local/opt/php@7.4/bin:$PATH"
 export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
+
+alias luamake=/home/andrewcline/.config/nvim/lua-language-server/3rd/luamake/luamake
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
