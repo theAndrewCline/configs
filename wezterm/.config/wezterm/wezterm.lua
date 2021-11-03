@@ -5,7 +5,7 @@ return {
     "Dank Mono",
     "SauceCodePro Nerd Font",
   }),
-  font_size = 14,
+  font_size = 18,
   color_scheme = "ayu",
   line_height = 1.1,
   enable_tab_bar = false,
