@@ -53,21 +53,24 @@ return require('packer').startup(function()
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true},
     config = function()
-      -- require('lualine').setup({
-      --   options = {
-      --     theme = 'ayu',
-      --     section_separators = '',
-      --     component_separators = ''
-      --   }
-      -- })
-      require('bubbleline')
+      require('lualine').setup({
+        options = {
+          theme = 'ayu',
+          section_separators = '',
+          component_separators = ''
+        }
+      })
     end
   }
 
   use { 
     'shatur/neovim-ayu',
     config = function() 
-      require('ayu').colorscheme()
+      local ayu = require'ayu'
+      ayu.setup{
+        mirage = true
+      }
+      ayu.colorscheme()
     end
   }
 
