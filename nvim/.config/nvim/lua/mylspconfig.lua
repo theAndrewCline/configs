@@ -10,9 +10,10 @@ require'lspconfig'.cssls.setup{
 require'lspconfig'.tailwindcss.setup{}
 require('lspconfig').tsserver.setup{}
 require('lspconfig').svelte.setup{}
-require('lspconfig').vuels.setup{}
+-- require('lspconfig').vuels.setup{}
 require('lspconfig').graphql.setup{}
-require('lspconfig').vls.setup{}
+-- require('lspconfig').vls.setup{}
+require('lspconfig').volar.setup{}
 require'lspconfig'.intelephense.setup{}
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.rust_analyzer.setup{
