@@ -167,10 +167,10 @@ bindcode $mod+Shift+90 	 move container to workspace  $ws10
 ######################################
 
 # start a terminal
-bindsym $mod+Return exec wezterm
+bindsym $mod+Return exec alacritty
 
 # kill focused window
-bindsym $mod+c kill
+bindsym $mod+q kill
 
 # exit-menu
 bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
@@ -288,11 +288,11 @@ bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3"
+set $ws4 "4:"
+set $ws5 "5:𝅘𝅥𝅯"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -309,19 +309,19 @@ set $ws10 "10"
 #workspace $ws5 output HDMI-0
 
 # bind program to workspace and focus to them on startup:
-assign [class="Xfce4-terminal"] $ws1
-assign [class="(?i)firefox"] $ws2
-assign [class="Thunar"] $ws3
-assign [class="Thunderbird"] $ws4
-assign [class="TelegramDesktop"] $ws5
+assign [class="(?i)firefox"] $ws1
+assign [class="Alacritty"] $ws2
+assign [class="Slack"] $ws4
+assign [class="TelegramDesktop"] $ws4
+assign [class="Spotify"] $ws5
 
 
 # automatic set focus new window if it opens on another workspace then the current:
-for_window [class=Xfce4-terminal] focus
 for_window [class=(?i)firefox] focus
-for_window [class=Thunar] focus
-for_window [class=Thunderbird] focus
+for_window [class=Alacritty] focus
 for_window [class=TelegramDesktop] focus
+for_window [class=Slack] focus
+for_window [class=Spotify] focus
 
 #############################################
 # autostart applications/services on login: #
@@ -329,6 +329,9 @@ for_window [class=TelegramDesktop] focus
 
 #get auth work with polkit-gnome
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# redshift :: removes blue light at night
+exec --no-startup-id redshift -l 40.701050:-89.610050
 
 # dex execute .desktop files
 # keep in mind that it can cause issues 
