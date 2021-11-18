@@ -175,6 +175,34 @@ schemes:
       magenta: "0xFFEE99"
       cyan: "0x95E6CB"
       white: "0xFFFFFF"
+        
+  ayu_mirage: &ayu_mirage
+  # Default colors
+    primary:
+      background: '#202734'
+      foreground: '#CBCCC6'
+
+    # Normal colors
+    normal:
+      black:    '#191E2A'
+      red:      '#FF3333'
+      green:    '#BAE67E'
+      yellow:   '#FFA759'
+      blue:     '#73D0FF'
+      magenta:  '#FFD580'
+      cyan:     '#95E6CB'
+      white:    '#C7C7C7'
+
+    # Bright colors
+    bright:
+      black:   '#686868'
+      red:     '#F27983'
+      green:   '#A6CC70'
+      yellow:  '#FFCC66'
+      blue:    '#5CCFE6'
+      magenta: '#FFEE99'
+      cyan:    '#95E6CB'
+      white:   '#FFFFFF'
 
   seoul_256: &seoul_256 # Default colors
     primary:
@@ -200,6 +228,7 @@ schemes:
       magenta: "#ffafaf"
       cyan: "#87d7d7"
       white: "#e4e4e4"
+
   tokyo-night: &tokyo-night
     primary:
       background: "0x1a1b26"
@@ -281,4 +310,4 @@ schemes:
       cyan:    '0xa3f7ff'
       white:   '0xffffff'
 
-colors: *tokyo-night-storm
+colors: *ayu_mirage
