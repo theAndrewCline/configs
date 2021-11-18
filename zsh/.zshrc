@@ -81,8 +81,6 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR='nvim'
 
-export TERM=wezterm
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
