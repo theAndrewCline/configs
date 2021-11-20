@@ -15,7 +15,6 @@ return require('packer').startup(function()
       require("indent_blankline").setup {
         space_char_blankline = " ",
         show_current_context = true,
-        char = "|",
         buftype_exclude = {"terminal"}
       }
     end
@@ -43,7 +42,16 @@ return require('packer').startup(function()
   }
 
   use 'tpope/vim-commentary'
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    config = function()
+      require'nvim-treesitter.configs'.setup {
+        context_commentstring = {
+          enable = true
+        }
+      }
+    end
+    }
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
