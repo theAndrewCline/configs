@@ -9,17 +9,6 @@ end
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
-  use { 
-    "lukas-reineke/indent-blankline.nvim",
-    config = function() 
-      require("indent_blankline").setup {
-        space_char_blankline = " ",
-        show_current_context = true,
-        buftype_exclude = {"terminal"}
-      }
-    end
-  }
-
   use 'jparise/vim-graphql'
 
   use {
@@ -59,47 +48,66 @@ return require('packer').startup(function()
   use 'tpope/vim-dadbod'
 
   use {
-    'hoob3rt/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    'nvim-lualine/lualine.nvim',
+    -- requires = {'kyazdani42/nvim-web-devicons', opt = true},
     config = function()
       require('lualine').setup({
+        tabline = {
+          lualine_a = {'buffers'},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {'branch'}
+        },
         options = {
-          theme = 'ayu',
-          section_separators = '',
-          component_separators = ''
+          theme = "rose-pine",
+          section_separators = { right = '', left = ''},
+          component_separators = { right = '', left = ''},
         }
       })
     end
   }
 
-  use { 
-    'shatur/neovim-ayu',
-    config = function() 
-      local ayu = require'ayu'
-      ayu.setup{
-        mirage = true
-      }
-      ayu.colorscheme()
-    end
-  }
+  -- use {
+  --   'EdenEast/nightfox.nvim',
+  --   config = function() 
+  --     local nightfox = require('nightfox')
+
+  --     nightfox.setup({
+  --       fox = 'nightfox',
+  --       style = {
+  --         comments = "italic",
+  --         keywords = "italic,bold",
+  --       }
+  --     })
+
+  --     nightfox.load()
+
+  --   end
+ -- }
+
+  use({
+      'rose-pine/neovim',
+      as = 'rose-pine',
+      tag = 'v0.1.0', -- Optional tag release
+      config = function()
+        -- vim.g.rose_pine_variant = 'moon' 
+        vim.cmd('colorscheme rose-pine')
+      end
+  })
 
   use { 
     'folke/lsp-colors.nvim'
   }
-  use { 
-    'folke/trouble.nvim',
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup{}
-    end
-  }
 
-  use { 
-    'glepnir/lspsaga.nvim',
-    config = function()
-      require('lspsaga').init_lsp_saga()
-    end
-  }
+  -- use { 
+  --   'folke/trouble.nvim',
+  --   requires = "kyazdani42/nvim-web-devicons",
+  --   config = function()
+  --     require("trouble").setup{}
+  --   end
+  -- }
 
   use({
       'L3MON4D3/luasnip',
@@ -193,17 +201,6 @@ return require('packer').startup(function()
   }
 
   use {
-    'windwp/nvim-ts-autotag',
-    config = function() 
-      require('nvim-ts-autotag').setup {
-        filetypes = {
-          'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'php'
-        },
-      }
-    end
-  }
-
-  use {
     'windwp/nvim-autopairs',
     config = function() 
       require('nvim-autopairs').setup {}
@@ -222,15 +219,5 @@ return require('packer').startup(function()
     end
   }
 
-  -- use {
-  --   'glepnir/galaxyline.nvim',
-  --     branch = 'main',
-  --     -- your statusline
-  --     config = function() require'superline' end,
-  --     -- some optional icons
-  --     requires = {'kyazdani42/nvim-web-devicons', opt = true}
-  -- }
-
   use 'christoomey/vim-tmux-navigator'
 end)
-
