@@ -1,15 +1,16 @@
 window:
-  # decorations: "none"
+  decorations: "buttonless"
   padding:
     x: 10
     y: 10
 
+  use_thin_strokes: true
+
 font:
   normal:
-    family: "SauceCodePro Nerd Font"
-    # family: "FiraCode Nerd Font Mono"
+    family: "JetBrainsMono Nerd Font Mono"
     style: Regular
-    size: 15 
+    size: 20 
 
 schemes:
   everforest_dark_hard: &everforest_dark_hard
@@ -107,6 +108,7 @@ schemes:
       magenta: "0xd3869b"
       cyan: "0x8ec07c"
       white: "0xebdbb2"
+
   one_dark: &one_dark # Default colors
     primary:
       background: "0x282c34"
@@ -251,6 +253,37 @@ schemes:
       cyan: "0x0db9d7"
       white: "0xacb0d0"
 
+
+    nightfox: &nightfox
+      # Default colors
+      primary:
+        background: '0x192330'
+        foreground: '0xcdcecf'
+      # Normal colors
+      normal:
+        black:   '0x393b44'
+        red:     '0xc94f6d'
+        green:   '0x81b29a'
+        yellow:  '0xdbc074'
+        blue:    '0x719cd6'
+        magenta: '0x9d79d6'
+        cyan:    '0x63cdcf'
+        white:   '0xdfdfe0'
+      # Bright colors
+      bright:
+        black:   '0x475072'
+        red:     '0xd6616b'
+        green:   '0x58cd8b'
+        yellow:  '0xffe37e'
+        blue:    '0x84cee4'
+        magenta: '0xb8a1e3'
+        cyan:    '0x59f0ff'
+        white:   '0xf2f2f2'
+      indexed_colors:
+        - { index: 16, color: '0xf4a261' }
+        - { index: 17, color: '0xd67ad2' }
+
+
   tokyo-night-storm: &tokyo-night-storm # Default colors
     primary:
       background: "0x24283b"
@@ -305,4 +338,40 @@ schemes:
       cyan:    '0xa3f7ff'
       white:   '0xffffff'
 
-colors: *ayu_mirage
+        
+  rose_pine_moon: &rose_pine_moon
+    primary:
+      background: '0x232136'
+      foreground: '0xe0def4'
+    cursor:
+      text: '0x232136'
+      cursor: '0x825B65'
+    vi_mode_cursor:
+      text: '0x191724'
+      cursor: '0x825B65'
+    line_indicator:
+      foreground: None
+      background: None
+    selection:
+      text: CellForeground
+      background: '0x312E45'
+    normal:
+      black:   '0x817c9c'
+      red:     '0xeb6f92'
+      green:   '0x9ccfd8'
+      yellow:  '0xf6c177'
+      blue:    '0x3e8fb0'
+      magenta: '0xc4a7e7'
+      cyan:    '0xea9a97'
+      white:   '0xe0def4'
+    bright:
+      black:   '0x6e6a86'
+      red:     '0xeb6f92'
+      green:   '0x9ccfd8'
+      yellow:  '0xf6c177'
+      blue:    '0x31748f'
+      magenta: '0xc4a7e7'
+      cyan:    '0xebbcba'
+      white:   '0xe0def4'
+
+colors: *rose_pine_moon
