@@ -69,24 +69,6 @@ return require('packer').startup(function()
     end
   }
 
-  -- use {
-  --   'EdenEast/nightfox.nvim',
-  --   config = function() 
-  --     local nightfox = require('nightfox')
-
-  --     nightfox.setup({
-  --       fox = 'nightfox',
-  --       style = {
-  --         comments = "italic",
-  --         keywords = "italic,bold",
-  --       }
-  --     })
-
-  --     nightfox.load()
-
-  --   end
- -- }
-
   use({
       'rose-pine/neovim',
       as = 'rose-pine',
@@ -100,14 +82,6 @@ return require('packer').startup(function()
   use { 
     'folke/lsp-colors.nvim'
   }
-
-  -- use { 
-  --   'folke/trouble.nvim',
-  --   requires = "kyazdani42/nvim-web-devicons",
-  --   config = function()
-  --     require("trouble").setup{}
-  --   end
-  -- }
 
   use({
       'L3MON4D3/luasnip',
@@ -197,13 +171,6 @@ return require('packer').startup(function()
         indent = { enable = true },
         highlight = { enable = true }
       }
-    end
-  }
-
-  use {
-    'windwp/nvim-autopairs',
-    config = function() 
-      require('nvim-autopairs').setup {}
     end
   }
   

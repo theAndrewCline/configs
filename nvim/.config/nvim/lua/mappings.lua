@@ -18,8 +18,8 @@ map('n', '<C-l>', '<C-w>l', default_opts)
 -- lsp mappings
 map('n', 'gd', '<cmd> lua vim.lsp.buf.definition()<CR>', { silent = true, noremap = true })
 map('n', 'gD', 'gD <cmd>lua vim.lsp.buf.declaration()<CR>', { silent = true, noremap = true })
-map('n', '<silent> gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap = true })
-map('n', '<silent> K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true })
+map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap = true })
+map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true })
 map('n', 'vrr', '<cmd>lua vim.lsp.buf.references()<CR>', default_opts)
 
 map('n', '<silent>', '<C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap = true })

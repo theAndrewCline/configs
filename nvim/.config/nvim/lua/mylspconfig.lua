@@ -8,11 +8,13 @@ require'lspconfig'.cssls.setup{
   capabilities = capabilities
 }
 require'lspconfig'.tailwindcss.setup{}
-require('lspconfig').tsserver.setup{}
+require('lspconfig').tsserver.setup{
+  capabilities = capabilities
+}
 require('lspconfig').svelte.setup{}
 -- require('lspconfig').vuels.setup{}
 require('lspconfig').volar.setup{}
-require('lspconfig').graphql.setup{}
+-- require('lspconfig').graphql.setup{}
 require'lspconfig'.intelephense.setup{}
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.rust_analyzer.setup{
