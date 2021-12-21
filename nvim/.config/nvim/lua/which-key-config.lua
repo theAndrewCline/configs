@@ -13,7 +13,7 @@ wk.register({
   b = { ":Telescope file_browser<cr>", "Browse Files" },
   j = { ":cn<CR>", "Next in quick fix"},
   k = { ":cp<CR>", "Previous in quick fix"},
-  e = { ":TroubleToggle<CR>", "LSP Errors"},
+  -- e = { ":TroubleToggle<CR>", "LSP Errors"},
   g = {
     name = 'Git Actions',
     c = { ':Git commit<cr>', 'Git Commit' },
