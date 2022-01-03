@@ -12,6 +12,13 @@ return require('packer').startup(function(use)
   use 'jparise/vim-graphql'
 
   use {
+    'goolord/alpha-nvim',
+    config = function () 
+      require'alpha'.setup(require'alpha.themes.startify'.opts)
+    end
+  }
+
+  use {
     "folke/zen-mode.nvim",
     config = function()
       require("zen-mode").setup {
@@ -45,7 +52,9 @@ return require('packer').startup(function(use)
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
   use 'tpope/vim-vinegar'
+  use 'tpope/vim-dispatch'
   use 'tpope/vim-dadbod'
+  use 'kristijanhusak/vim-dadbod-ui'
 
   use {
     'nvim-lualine/lualine.nvim',
@@ -54,15 +63,12 @@ return require('packer').startup(function(use)
       require('lualine').setup({
         tabline = {
           lualine_a = {'buffers'},
-          lualine_b = {},
-          lualine_c = {},
-          lualine_x = {},
-          lualine_y = {},
           lualine_z = {'branch'}
         },
         options = {
           theme = "rose-pine",
-          section_separators = { right = '', left = ''},
+          -- section_separators = { right = '', left = ''},
+          section_separators = { right = '', left = ''},
           component_separators = { right = '', left = ''},
         }
       })
@@ -70,14 +76,22 @@ return require('packer').startup(function(use)
   }
 
   use({
-      'rose-pine/neovim',
-      as = 'rose-pine',
-      tag = 'v0.1.0', -- Optional tag release
-      config = function()
-        -- vim.g.rose_pine_variant = 'moon' 
-        vim.cmd('colorscheme rose-pine')
-      end
+    'sainnhe/everforest',
+    config = function ()
+      vim.g.everforest_background = 'hard'
+      vim.g.everforest_enable_italic = 1
+      vim.cmd('colorscheme everforest')
+    end
   })
+
+  -- use({
+  --     'rose-pine/neovim',
+  --     as = 'rose-pine',
+  --     tag = 'v0.1.0', -- Optional tag release
+  --     config = function()
+  --       vim.cmd('colorscheme rose-pine')
+  --     end
+  -- })
 
   use { 
     'folke/lsp-colors.nvim'
@@ -98,6 +112,7 @@ return require('packer').startup(function(use)
    'hrsh7th/nvim-cmp',
    config = function() 
     local cmp = require('cmp')
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
     cmp.setup({
       snippet = {
@@ -119,6 +134,9 @@ return require('packer').startup(function(use)
         { name = 'path'}
       }
     })
+
+    cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+
    end
   }
 
@@ -171,6 +189,13 @@ return require('packer').startup(function(use)
         indent = { enable = true },
         highlight = { enable = true }
       }
+    end
+  }
+
+  use { 
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup({})
     end
   }
   

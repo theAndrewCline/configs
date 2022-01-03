@@ -7,7 +7,7 @@ wk.register({
   s = { ':Telescope live_grep<cr>', 'Search' },
   S = { ':PackerSync<cr>', 'Update Plugins' },
   t = { ':Telescope<cr>', 'Telescope' },
-  d = { ":Telescope lsp_workspace_diagnostics<cr>", "Code Diagnostics"},
+  d = { ":DBUIToggle<CR>", "Dadbod Toggle"},
   u = { ":so $MYVIMRC<cr>", "Refresh vimrc" },
   f = { ":ZenMode<cr>", "Zen Mode" },
   b = { ":Telescope file_browser<cr>", "Browse Files" },

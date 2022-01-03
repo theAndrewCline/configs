@@ -412,4 +412,4 @@ schemes:
       cyan:    '0xebbcba'
       white:   '0xe0def4'
 
-colors: *rose_pine
+colors: *everforest_dark_hard

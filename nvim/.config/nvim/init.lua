@@ -14,13 +14,16 @@ opts.inccommand = 'split' -- show a preview of the changes by norm command
 opts.mouse = 'a'
 opts.encoding = 'utf-8'
 opts.ruler = true
--- opts.conceallevel = 0 --  so I can see ` in markdown files
 opts.updatetime = 300 -- faster completions
 opts.timeoutlen = 500
+
+opts.guifont = "FiraCode Nerd Font:h18"
+
 opts.smarttab = true
 opts.expandtab = true
 opts.tabstop = 2 -- 2 spaces for tab
 opts.shiftwidth = 2
+
 opts.list = false
 
 opts.termguicolors = true
@@ -37,4 +40,6 @@ vim.o.background = "dark"
 vim.cmd[[syntax on]]
 
 require("luasnip/loaders/from_vscode").load({ paths = { "~/configs/nvim/snips" } })
-require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip/loaders/from_vscode").lazy_load() 
+
+vim.cmd('packadd cfilter')
