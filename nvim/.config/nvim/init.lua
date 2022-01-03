@@ -37,4 +37,4 @@ vim.o.background = "dark"
 vim.cmd[[syntax on]]
 
 require("luasnip/loaders/from_vscode").load({ paths = { "~/configs/nvim/snips" } })
-require("luasnip/loaders/from_vscode").lazy_load() 
+require("luasnip/loaders/from_vscode").lazy_load()
