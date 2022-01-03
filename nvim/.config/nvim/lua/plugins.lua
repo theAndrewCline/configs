@@ -11,12 +11,12 @@ return require('packer').startup(function(use)
 
   use 'jparise/vim-graphql'
 
-  use {
-    'goolord/alpha-nvim',
-    config = function () 
-      require'alpha'.setup(require'alpha.themes.startify'.opts)
-    end
-  }
+  -- use {
+  --   'goolord/alpha-nvim',
+  --   config = function () 
+  --     require'alpha'.setup(require'alpha.themes.startify'.opts)
+  --   end
+  -- }
 
   use {
     "folke/zen-mode.nvim",
@@ -66,7 +66,7 @@ return require('packer').startup(function(use)
           lualine_z = {'branch'}
         },
         options = {
-          theme = "rose-pine",
+          theme = "everforest",
           -- section_separators = { right = '', left = ''},
           section_separators = { right = '', left = ''},
           component_separators = { right = '', left = ''},
