@@ -4,8 +4,8 @@ env:
 window:
   decorations: "buttonless"
   padding:
-    x: 10
-    y: 10
+    x: 20
+    y: 20
 
   use_thin_strokes: true
 
