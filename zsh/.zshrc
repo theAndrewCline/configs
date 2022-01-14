@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="norm"
+ZSH_THEME="wedisagree"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -108,3 +108,6 @@ export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
 alias luamake=/home/andrewcline/.config/nvim/lua-language-server/3rd/luamake/luamake
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+alias ibrew='arch -x86_64 /usr/local/homebrew/bin/brew'
+alias mbrew='arch -arm64e /opt/homebrew/bin/brew'

@@ -10,10 +10,10 @@ window:
   use_thin_strokes: true
 
 font:
+  size: 20 
   normal:
     family: "FiraCode Nerd Font"
     style: Regular
-    size: 20 
 
 schemes:
   everforest_dark_hard: &everforest_dark_hard
