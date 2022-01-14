@@ -1,2 +1,6 @@
 nvim/bundle
 nvim/autoload
+
+nvim/plugin
+
+nvim/.config/nvim/plugin/*
