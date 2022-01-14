@@ -2,7 +2,7 @@ env:
   TERM: xterm-256color
 
 window:
-  decorations: "None"
+  decorations: "buttonless"
   padding:
     x: 10
     y: 10
