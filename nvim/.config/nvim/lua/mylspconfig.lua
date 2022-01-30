@@ -26,6 +26,7 @@ require'lspconfig'.rust_analyzer.setup{
     }
   }
 }
+require'lspconfig'.dockerls.setup{}
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -123,7 +124,6 @@ require('lspconfig').diagnosticls.setup {
       html = 'prettier',
       typescript = 'prettier',
       typescriptreact = 'prettier',
-      json = 'prettier',
       markdown = 'prettier',
       vue = 'prettier',
       graphql = 'prettier',

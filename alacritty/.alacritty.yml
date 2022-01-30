@@ -1,6 +1,7 @@
 env:
   TERM: xterm-256color
 
+background_opacity: 0.8
 window:
   decorations: "buttonless"
   padding:
@@ -412,4 +413,4 @@ schemes:
       cyan:    '0xebbcba'
       white:   '0xe0def4'
 
-colors: *everforest_dark_hard
+colors: *gruvbox

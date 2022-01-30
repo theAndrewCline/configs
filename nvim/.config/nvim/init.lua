@@ -6,6 +6,7 @@ local opts = vim.o
 opts.nu = true
 opts.rnu = true
 
+
 opts.colorcolumn = '80'
 opts.cursorline = true
 opts.foldmethod = 'indent'
@@ -40,6 +41,9 @@ vim.o.background = "dark"
 vim.cmd[[syntax on]]
 
 require("luasnip/loaders/from_vscode").load({ paths = { "~/configs/nvim/snips" } })
-require("luasnip/loaders/from_vscode").lazy_load() 
+require("luasnip/loaders/from_vscode").lazy_load()
 
 vim.cmd('packadd cfilter')
+vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[highlight Normal ctermbg=none]])
+vim.cmd([[highlight NonText ctermbg=none]])

@@ -11,13 +11,6 @@ return require('packer').startup(function(use)
 
   use 'jparise/vim-graphql'
 
-  -- use {
-  --   'goolord/alpha-nvim',
-  --   config = function () 
-  --     require'alpha'.setup(require'alpha.themes.startify'.opts)
-  --   end
-  -- }
-
   use {
     "folke/zen-mode.nvim",
     config = function()
@@ -66,7 +59,7 @@ return require('packer').startup(function(use)
           lualine_z = {'branch'}
         },
         options = {
-          theme = "everforest",
+          theme = "gruvbox",
           -- section_separators = { right = '', left = ''},
           section_separators = { right = '', left = ''},
           component_separators = { right = '', left = ''},
@@ -75,14 +68,14 @@ return require('packer').startup(function(use)
     end
   }
 
-  use({
-    'sainnhe/everforest',
-    config = function ()
-      vim.g.everforest_background = 'hard'
-      vim.g.everforest_enable_italic = 1
-      vim.cmd('colorscheme everforest')
-    end
-  })
+  -- use({
+  --   'sainnhe/everforest',
+  --   config = function ()
+  --     vim.g.everforest_background = 'hard'
+  --     vim.g.everforest_enable_italic = 1
+  --     vim.cmd('colorscheme everforest')
+  --   end
+  -- })
 
   -- use({
   --     'rose-pine/neovim',
@@ -93,7 +86,7 @@ return require('packer').startup(function(use)
   --     end
   -- })
 
-  use { 
+  use {
     'folke/lsp-colors.nvim'
   }
 
@@ -110,7 +103,7 @@ return require('packer').startup(function(use)
   use 'saadparwaiz1/cmp_luasnip'
   use {
    'hrsh7th/nvim-cmp',
-   config = function() 
+   config = function()
     local cmp = require('cmp')
     local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
@@ -150,7 +143,7 @@ return require('packer').startup(function(use)
     end
   }
 
-  use { 
+  use {
     'lewis6991/gitsigns.nvim',
     config = function()
       require('gitsigns').setup {
@@ -159,14 +152,14 @@ return require('packer').startup(function(use)
     end
   }
 
-  use { 
+  use {
     'neovim/nvim-lspconfig',
-    config = function() require('mylspconfig') end 
-  } 
+    config = function() require('mylspconfig') end
+  }
 
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope-fzf-writer.nvim'
-  use { 
+  use {
     'nvim-telescope/telescope.nvim',
     config = function()
       require('telescope').setup {
@@ -180,7 +173,7 @@ return require('packer').startup(function(use)
     end
   }
 
-  use { 
+  use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function()
@@ -192,16 +185,16 @@ return require('packer').startup(function(use)
     end
   }
 
-  use { 
+  use {
     'windwp/nvim-autopairs',
     config = function()
       require('nvim-autopairs').setup({})
     end
   }
-  
+
   use { 'yardnsm/vim-import-cost',  run = 'yarn install' }
 
-  use 'ThePrimeagen/vim-be-good' 
+  use 'ThePrimeagen/vim-be-good'
 
   use {
     "folke/which-key.nvim",
@@ -212,4 +205,38 @@ return require('packer').startup(function(use)
   }
 
   use 'christoomey/vim-tmux-navigator'
+
+  use { "ellisonleao/gruvbox.nvim" }
+  use {
+    'xiyaowong/nvim-transparent',
+    config = function()
+      require("transparent").setup({
+        enable = true, -- boolean: enable transparent
+        extra_groups = { -- table/string: additional groups that should be clear
+          -- In particular, when you set it to 'all', that means all avaliable groups
+
+          -- example of akinsho/nvim-bufferline.lua
+          "BufferLineTabClose",
+          "BufferlineBufferSelected",
+          "BufferLineFill",
+          "BufferLineBackground",
+          "BufferLineSeparator",
+          "BufferLineIndicatorSelected",
+        },
+        exclude = {}, -- table: groups you don't want to clear
+      })
+    end
+  }
+
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+      end
+  }
 end)
