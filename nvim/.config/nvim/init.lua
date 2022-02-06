@@ -40,10 +40,11 @@ vim.opt.grepprg="rg\\ -S\\ --vimgrep"
 vim.o.background = "dark"
 vim.cmd[[syntax on]]
 
+
 require("luasnip/loaders/from_vscode").load({ paths = { "~/configs/nvim/snips" } })
 require("luasnip/loaders/from_vscode").lazy_load()
 
 vim.cmd('packadd cfilter')
-vim.cmd([[colorscheme gruvbox]])
+-- vim.cmd([[colorscheme gruvbox]])
 vim.cmd([[highlight Normal ctermbg=none]])
 vim.cmd([[highlight NonText ctermbg=none]])

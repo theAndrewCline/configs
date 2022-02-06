@@ -59,7 +59,7 @@ return require('packer').startup(function(use)
           lualine_z = {'branch'}
         },
         options = {
-          theme = "gruvbox",
+          theme = "ayu",
           -- section_separators = { right = '', left = ''},
           section_separators = { right = '', left = ''},
           component_separators = { right = '', left = ''},
@@ -206,26 +206,16 @@ return require('packer').startup(function(use)
 
   use 'christoomey/vim-tmux-navigator'
 
-  use { "ellisonleao/gruvbox.nvim" }
   use {
-    'xiyaowong/nvim-transparent',
+    "Shatur/neovim-ayu",
     config = function()
-      require("transparent").setup({
-        enable = true, -- boolean: enable transparent
-        extra_groups = { -- table/string: additional groups that should be clear
-          -- In particular, when you set it to 'all', that means all avaliable groups
+        require('ayu').setup({
+          mirage = false,
+          overrides = {},
+        })
 
-          -- example of akinsho/nvim-bufferline.lua
-          "BufferLineTabClose",
-          "BufferlineBufferSelected",
-          "BufferLineFill",
-          "BufferLineBackground",
-          "BufferLineSeparator",
-          "BufferLineIndicatorSelected",
-        },
-        exclude = {}, -- table: groups you don't want to clear
-      })
-    end
+        require('ayu').colorscheme()
+      end
   }
 
   use {
