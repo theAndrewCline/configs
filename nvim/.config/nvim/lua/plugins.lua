@@ -105,7 +105,6 @@ return require('packer').startup(function(use)
    'hrsh7th/nvim-cmp',
    config = function()
     local cmp = require('cmp')
-    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
     cmp.setup({
       snippet = {
@@ -127,8 +126,6 @@ return require('packer').startup(function(use)
         { name = 'path'}
       }
     })
-
-    cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
    end
   }
