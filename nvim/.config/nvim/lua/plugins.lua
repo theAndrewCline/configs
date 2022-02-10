@@ -133,8 +133,6 @@ return require('packer').startup(function(use)
    end
   }
 
-  use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
-
   use 'ryanoasis/vim-devicons'
   use {
     'kyazdani42/nvim-web-devicons',
@@ -231,5 +229,4 @@ return require('packer').startup(function(use)
       }
       end
   }
-
 end)
