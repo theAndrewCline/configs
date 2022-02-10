@@ -9,7 +9,13 @@ require'lspconfig'.cssls.setup{
 }
 require'lspconfig'.tailwindcss.setup{}
 require('lspconfig').tsserver.setup{
-  capabilities = capabilities
+  capabilities = capabilities,
+  init_options = require("nvim-lsp-ts-utils").init_options,
+  on_attach = function ()
+     local ts_utils = require("nvim-lsp-ts-utils")
+
+     ts_utils.setup({})
+  end
 }
 require('lspconfig').svelte.setup{}
 -- require('lspconfig').vuels.setup{}
