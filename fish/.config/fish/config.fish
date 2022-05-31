@@ -17,6 +17,7 @@ alias luamake=/home/andrewcline/.config/nvim/lua-language-server/3rd/luamake/lua
 
 fish_add_path ~/.yarn/bin
 fish_add_path ~/.config/yarn/global/node_modules/.bin
+fish_add_path ~/.scripts
 
 abbr -a -g ef $EDITOR ~/.config/fish/config.fish
 abbr -a -g sf source ~/.config/fish/config.fish
