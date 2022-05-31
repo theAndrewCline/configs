@@ -1,24 +1,22 @@
 fish_vi_key_bindings
 
-function open_repository
-  set $git_repo=(ls ~/code | fzf)
+set EDITOR nvim
 
-  if test -n "$git_repo"
-    exit 0
-  end
+fish_add_path /opt/homebrew/bin
+fish_add_path ~/.local/bin
 
-  # 1. First you check if a tmux session exists with a given name.
-  tmux has-session -t=$git_repo 2> /dev/null
+fish_add_path ~/.local/flutter/bin
+fish_add_path ~/.scripts
+fish_add_path ~/go/bin
+fish_add_path /usr/local/opt/php@7.4/bin
+fish_add_path /usr/local/opt/php@7.4/sbin
 
-  # 2. Create the session if it doesn't exists.
-  if test $status -ne 0
-    TMUX='' tmux new-session -d -s "$git_repo" -c ~/code/$git_repo
-  end
+set FZF_DEFAULT_COMMAND "rg --files"
 
-  # 3. Attach if outside of tmux, switch if you're in tmux.
-  if test -z "$TMUX"
-    tmux attach -t "$git_repo"
-  else
-    tmux switch-client -t "$git_repo"
-  end
-end
+alias luamake=/home/andrewcline/.config/nvim/lua-language-server/3rd/luamake/luamake
+
+fish_add_path ~/.yarn/bin
+fish_add_path ~/.config/yarn/global/node_modules/.bin
+
+abbr -a -g ef $EDITOR ~/.config/fish/config.fish
+abbr -a -g sf source ~/.config/fish/config.fish
