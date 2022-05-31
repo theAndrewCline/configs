@@ -1,23 +1,94 @@
+local lspconfig = require("lspconfig")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+local null_ls = require("null-ls")
+
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require'lspconfig'.html.setup{
+local buf_map = function(bufnr, mode, lhs, rhs, opts)
+  vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
+    silent = true,
+  })
+end
+
+local on_attach = function(client, bufnr)
+  vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
+  vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
+  vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
+  vim.cmd("command! LspHover lua vim.lsp.buf.hover()")
+  vim.cmd("command! LspRename lua vim.lsp.buf.rename()")
+  vim.cmd("command! LspRefs lua vim.lsp.buf.references()")
+  vim.cmd("command! LspTypeDef lua vim.lsp.buf.type_definition()")
+  vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
+  vim.cmd("command! LspDiagPrev lua vim.diagnostic.goto_prev()")
+  vim.cmd("command! LspDiagNext lua vim.diagnostic.goto_next()")
+  vim.cmd("command! LspDiagLine lua vim.diagnostic.open_float()")
+  vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
+
+  buf_map(bufnr, 'n', 'gd', '<cmd> lua vim.lsp.buf.definition()<CR>')
+  buf_map(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+  buf_map(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+  buf_map(bufnr, "n", "gr", ":LspRename<CR>")
+  buf_map(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+  buf_map(bufnr, 'n', 'vrr', '<cmd>lua vim.lsp.buf.references()<CR>')
+
+  buf_map(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+  buf_map(bufnr, 'n', '<C-p>', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+  buf_map(bufnr, 'n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+
+  -- buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>")
+  if client.resolved_capabilities.document_formatting then
+    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+  end
+end
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.goimports,
+    null_ls.builtins.formatting.gofmt,
+    null_ls.builtins.code_actions.refactoring
+  },
+  on_attach = on_attach
+})
+
+lspconfig.html.setup {
   capabilities = capabilities
 }
-require'lspconfig'.cssls.setup{
+
+lspconfig.cssls.setup {
   capabilities = capabilities
 }
-require'lspconfig'.tailwindcss.setup{}
-require('lspconfig').tsserver.setup{
-  capabilities = capabilities
+
+lspconfig.tailwindcss.setup {}
+
+lspconfig.tsserver.setup {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+    local ts_utils = require("nvim-lsp-ts-utils")
+    ts_utils.setup({})
+    ts_utils.setup_client(client)
+    buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
+    buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
+    buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
+    on_attach(client, bufnr)
+  end
 }
-require('lspconfig').svelte.setup{}
--- require('lspconfig').vuels.setup{}
-require('lspconfig').volar.setup{}
--- require('lspconfig').graphql.setup{}
-require'lspconfig'.intelephense.setup{}
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.rust_analyzer.setup{
+
+lspconfig.svelte.setup {}
+
+lspconfig.graphql.setup {}
+
+lspconfig.gopls.setup {
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+    on_attach(client, bufnr)
+  end
+}
+
+lspconfig.rust_analyzer.setup {
   settings = {
     ["rust_analyzer"] = {
       checkOnSave = {
@@ -26,13 +97,15 @@ require'lspconfig'.rust_analyzer.setup{
     }
   }
 }
-require'lspconfig'.dockerls.setup{}
+
+lspconfig.dockerls.setup {}
 
 local runtime_path = vim.split(package.path, ';')
+
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-require'lspconfig'.sumneko_lua.setup {
+lspconfig.sumneko_lua.setup {
   settings = {
     Lua = {
       runtime = {
@@ -43,7 +116,7 @@ require'lspconfig'.sumneko_lua.setup {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = { 'vim' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -55,81 +128,4 @@ require'lspconfig'.sumneko_lua.setup {
       },
     },
   },
-}
-
-local on_attach = function(client, bufnr)
-  if client.resolved_capabilities.document_formatting then
-    vim.api.nvim_command [[augroup Format]]
-    vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-    vim.api.nvim_command [[augroup END]]
-  end
-end
-
-local function organize_imports()
-  local params = {
-    command = "_typescript.organizeImports",
-    arguments = {vim.api.nvim_buf_get_name(0)},
-    title = ""
-  }
-
-  vim.lsp.buf.execute_command(params)
-end
-
-require('lspconfig').diagnosticls.setup {
-  on_attach = on_attach,
-  filetypes = {
-    'javascript',
-    'javascriptreact',
-    'json',
-    'typescript',
-    'typescriptreact',
-    'css',
-    'less',
-    'scss',
-    'markdown',
-    'pandoc',
-    'vue',
-    'graphql',
-    'lua',
-    'html',
-    'go',
-    'rust'
-    -- 'php'
-  },
-  commands = {
-    OrganizeImports = {
-      organize_imports,
-      description = "Organize Imports"
-    }
-  },
-  init_options = {
-    formatters = {
-      prettier = {
-        command = 'prettier',
-        args = { '--stdin-filepath', '%filename' }
-      },
-      luafmt = {
-        command = 'luafmt',
-        args = {}
-      }
-    },
-    formatFiletypes = {
-      css = 'prettier',
-      javascript = 'prettier',
-      javascriptreact = 'prettier',
-      json = 'prettier',
-      scss = 'prettier',
-      less = 'prettier',
-      html = 'prettier',
-      typescript = 'prettier',
-      typescriptreact = 'prettier',
-      markdown = 'prettier',
-      vue = 'prettier',
-      graphql = 'prettier',
-      lua = 'luafmt',
-      go = 'gofmt',
-      rust = 'rustfmt'
-    }
-  }
 }

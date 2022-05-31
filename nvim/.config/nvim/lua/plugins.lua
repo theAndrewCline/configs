@@ -1,8 +1,8 @@
 local fn = vim.fn
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
   vim.cmd 'packadd packer.nvim'
 end
 
@@ -34,13 +34,13 @@ return require('packer').startup(function(use)
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
     config = function()
-      require'nvim-treesitter.configs'.setup {
+      require 'nvim-treesitter.configs'.setup {
         context_commentstring = {
           enable = true
         }
       }
     end
-    }
+  }
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
@@ -55,14 +55,14 @@ return require('packer').startup(function(use)
     config = function()
       require('lualine').setup({
         tabline = {
-          lualine_a = {'buffers'},
-          lualine_z = {'branch'}
+          lualine_a = { 'buffers' },
+          lualine_z = { 'branch' }
         },
         options = {
           theme = "ayu",
           -- section_separators = { right = '', left = ''},
-          section_separators = { right = '', left = ''},
-          component_separators = { right = '', left = ''},
+          section_separators = { right = '', left = '' },
+          component_separators = { right = '', left = '' },
         }
       })
     end
@@ -91,10 +91,10 @@ return require('packer').startup(function(use)
   }
 
   use({
-      'L3MON4D3/luasnip',
-      requires = {
-          'rafamadriz/friendly-snippets',
-      },
+    'L3MON4D3/luasnip',
+    requires = {
+      'rafamadriz/friendly-snippets',
+    },
   })
 
   use { 'hrsh7th/cmp-nvim-lsp' }
@@ -102,39 +102,44 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/cmp-path' }
   use 'saadparwaiz1/cmp_luasnip'
   use {
-   'hrsh7th/nvim-cmp',
-   config = function()
-    local cmp = require('cmp')
+    'hrsh7th/nvim-cmp',
+    config = function()
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      local cmp = require('cmp')
 
-    cmp.setup({
-      snippet = {
-        expand = function(args)
-          require('luasnip').lsp_expand(args.body)
-        end,
-      },
-      mapping = {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<TAB>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.close(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-      },
-      sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path'}
-      }
-    })
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 
-   end
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+          end,
+        },
+        mapping = {
+          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-n>'] = cmp.mapping.select_next_item(),
+          ['<C-p>'] = cmp.mapping.select_prev_item(),
+          ['<TAB>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.close(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        },
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'buffer' },
+          { name = 'path' }
+        }
+      })
+
+    end
   }
 
   use 'ryanoasis/vim-devicons'
   use {
     'kyazdani42/nvim-web-devicons',
     config = function()
-      require'nvim-web-devicons'.setup {
+      require 'nvim-web-devicons'.setup {
         default = true;
       }
     end
@@ -149,10 +154,9 @@ return require('packer').startup(function(use)
     end
   }
 
-  use {
-    'neovim/nvim-lspconfig',
-    config = function() require('mylspconfig') end
-  }
+  use 'neovim/nvim-lspconfig'
+  use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+  use 'jose-elias-alvarez/null-ls.nvim'
 
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope-fzf-writer.nvim'
@@ -174,7 +178,7 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function()
-      require'nvim-treesitter.configs'.setup {
+      require 'nvim-treesitter.configs'.setup {
         autopairs = { enable = true },
         indent = { enable = true },
         highlight = { enable = true }
@@ -189,14 +193,14 @@ return require('packer').startup(function(use)
     end
   }
 
-  use { 'yardnsm/vim-import-cost',  run = 'yarn install' }
+  use { 'yardnsm/vim-import-cost', run = 'yarn install' }
 
   use 'ThePrimeagen/vim-be-good'
 
   use {
     "folke/which-key.nvim",
     config = function()
-      require("which-key").setup{}
+      require("which-key").setup {}
       require('which-key-config')
     end
   }
@@ -206,24 +210,17 @@ return require('packer').startup(function(use)
   use {
     "Shatur/neovim-ayu",
     config = function()
-        require('ayu').setup({
-          mirage = true,
-          overrides = {},
-        })
+      require('ayu').setup({
+        mirage = true,
+        overrides = {},
+      })
 
-        require('ayu').colorscheme()
-      end
+      require('ayu').colorscheme()
+    end
   }
 
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-      end
   }
 end)
