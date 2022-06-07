@@ -44,6 +44,8 @@ end
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.prettier,
+    -- null_ls.builtins.code_actions.eslint,
+    -- null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.formatting.goimports,
     null_ls.builtins.formatting.gofmt,
     null_ls.builtins.code_actions.refactoring
@@ -62,6 +64,7 @@ lspconfig.cssls.setup {
 lspconfig.tailwindcss.setup {}
 
 lspconfig.tsserver.setup {
+  init_options = require("nvim-lsp-ts-utils").init_options,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false

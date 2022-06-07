@@ -59,7 +59,7 @@ return require('packer').startup(function(use)
           lualine_z = { 'branch' }
         },
         options = {
-          theme = "ayu",
+          theme = "auto",
           -- section_separators = { right = '', left = ''},
           section_separators = { right = '', left = '' },
           component_separators = { right = '', left = '' },
@@ -207,15 +207,9 @@ return require('packer').startup(function(use)
 
   use 'christoomey/vim-tmux-navigator'
 
-  use {
-    "Shatur/neovim-ayu",
+  use { 'projekt0n/github-nvim-theme',
     config = function()
-      require('ayu').setup({
-        mirage = true,
-        overrides = {},
-      })
-
-      require('ayu').colorscheme()
+      require('github-theme').setup {}
     end
   }
 
