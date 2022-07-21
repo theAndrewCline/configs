@@ -22,14 +22,6 @@ return require('packer').startup(function(use)
     end
   }
 
-  use {
-    "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("todo-comments").setup {}
-    end
-  }
-
   use 'tpope/vim-commentary'
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
@@ -49,10 +41,17 @@ return require('packer').startup(function(use)
   use 'tpope/vim-dadbod'
   use 'kristijanhusak/vim-dadbod-ui'
 
+  use { 'projekt0n/github-nvim-theme' }
+
   use {
     'nvim-lualine/lualine.nvim',
-    -- requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true, 'projekt0n/github-nvim-theme' },
     config = function()
+      require('github-theme').setup {
+        theme_style = 'dark',
+        dark_float = true
+      }
+
       require('lualine').setup({
         tabline = {
           lualine_a = { 'buffers' },
@@ -78,12 +77,12 @@ return require('packer').startup(function(use)
   -- })
 
   -- use({
-  --     'rose-pine/neovim',
-  --     as = 'rose-pine',
-  --     tag = 'v0.1.0', -- Optional tag release
-  --     config = function()
-  --       vim.cmd('colorscheme rose-pine')
-  --     end
+  --   'rose-pine/neovim',
+  --   as = 'rose-pine',
+  --   tag = 'v0.1.0', -- Optional tag release
+  --   config = function()
+  --     vim.cmd('colorscheme rose-pine')
+  --   end
   -- })
 
   use {
@@ -120,7 +119,7 @@ return require('packer').startup(function(use)
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-n>'] = cmp.mapping.select_next_item(),
           ['<C-p>'] = cmp.mapping.select_prev_item(),
-          ['<TAB>'] = cmp.mapping.complete(),
+          ['<C-Space>'] = cmp.mapping.complete({ }),
           ['<C-e>'] = cmp.mapping.close(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }),
         },
@@ -181,7 +180,7 @@ return require('packer').startup(function(use)
       require 'nvim-treesitter.configs'.setup {
         autopairs = { enable = true },
         indent = { enable = true },
-        highlight = { enable = true }
+        highlight = { enable = true },
       }
     end
   }
@@ -207,11 +206,6 @@ return require('packer').startup(function(use)
 
   use 'christoomey/vim-tmux-navigator'
 
-  use { 'projekt0n/github-nvim-theme',
-    config = function()
-      require('github-theme').setup {}
-    end
-  }
 
   use {
     "folke/trouble.nvim",
