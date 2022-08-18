@@ -2,12 +2,10 @@ require('plugins')
 require('mylspconfig')
 require('mappings')
 
-require("trouble").setup {}
-
 local opts = vim.o
 
-opts.nu = true
-opts.rnu = true
+opts.nu = false
+opts.rnu = false
 
 
 opts.colorcolumn = '80'
@@ -43,14 +41,7 @@ vim.opt.grepprg = "rg\\ -S\\ --vimgrep"
 vim.o.background = "dark"
 vim.cmd [[syntax on]]
 
-
-require("luasnip/loaders/from_vscode").load({ paths = { "~/configs/nvim/snips" } })
-require("luasnip/loaders/from_vscode").lazy_load()
-
 vim.cmd('packadd cfilter')
--- vim.cmd([[colorscheme gruvbox]])
-vim.cmd([[highlight Normal ctermbg=none]])
-vim.cmd([[highlight NonText ctermbg=none]])
 
 local lsp = {
   float = {
@@ -59,7 +50,6 @@ local lsp = {
     border = "rounded",
   },
   diagnostic = {
-    -- virtual_text = true,
     virtual_text = { spacing = 4, prefix = "●" },
     underline = true,
     update_in_insert = false,
@@ -91,3 +81,8 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, ls
 
 -- Signature help configuration
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, lsp.float)
+
+require 'nvim-treesitter.configs'.setup {
+  indent = { enable = true },
+  highlight = { enable = true },
+}

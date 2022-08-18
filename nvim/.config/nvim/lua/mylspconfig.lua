@@ -29,9 +29,9 @@ local on_attach = function(client, bufnr)
   buf_map(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
   buf_map(bufnr, "n", "gr", ":LspRename<CR>")
   buf_map(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-  buf_map(bufnr, 'n', 'vrr', '<cmd>lua vim.lsp.buf.references()<CR>')
+  buf_map(bufnr, 'n', 'gR', '<cmd>lua vim.lsp.buf.references()<CR>')
 
-  buf_map(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+  -- buf_map(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   buf_map(bufnr, 'n', '<C-p>', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
   buf_map(bufnr, 'n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 
@@ -48,7 +48,6 @@ null_ls.setup({
     -- null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.formatting.goimports,
     null_ls.builtins.formatting.gofmt,
-    null_ls.builtins.code_actions.refactoring
   },
   on_attach = on_attach
 })
@@ -63,6 +62,16 @@ lspconfig.cssls.setup {
 
 lspconfig.tailwindcss.setup {}
 
+-- require 'lspconfig'.denols.setup {
+--   capabilities = capabilities,
+--   on_attach = function(client, bufnr)
+--     client.resolved_capabilities.document_formatting = false
+--     client.resolved_capabilities.document_range_formatting = false
+--     on_attach(client, bufnr)
+--   end,
+--   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+-- }
+
 lspconfig.tsserver.setup {
   init_options = require("nvim-lsp-ts-utils").init_options,
   capabilities = capabilities,
@@ -76,7 +85,8 @@ lspconfig.tsserver.setup {
     buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
     buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
     on_attach(client, bufnr)
-  end
+  end,
+  root_dir = lspconfig.util.root_pattern("package.json")
 }
 
 lspconfig.svelte.setup {}
@@ -132,3 +142,16 @@ lspconfig.sumneko_lua.setup {
     },
   },
 }
+
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+lspconfig.jsonls.setup {
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+}
+
+lspconfig.dartls.setup {}
+require'lspconfig'.prismals.setup{}

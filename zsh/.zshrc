@@ -111,3 +111,12 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 alias ibrew='arch -x86_64 /usr/local/homebrew/bin/brew'
 alias mbrew='arch -arm64e /opt/homebrew/bin/brew'
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+# bun completions
+[ -s "/Users/acline/.bun/_bun" ] && source "/Users/acline/.bun/_bun"
+
+# bun
+export BUN_INSTALL="/Users/acline/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
