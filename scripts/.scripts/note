@@ -1,0 +1,12 @@
+#! /bin/bash
+
+note_dir=~/notes
+
+note=$(ls $note_dir | fzf)
+
+if [[ $note == '' ]]; then
+  exit 0
+fi
+
+
+$EDITOR "$note_dir/$note"

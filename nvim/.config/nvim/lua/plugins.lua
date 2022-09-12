@@ -13,16 +13,22 @@ return require('packer').startup(function(use)
   -- COLORS
   -----------------------------------------------------------------------------
 
-  use { 'projekt0n/github-nvim-theme' }
+  use {
+    'Shatur/neovim-ayu',
+    config = function ()
+      require('ayu').setup({
+        mirage = false, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
+        overrides = {}, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
+      })
+
+      require('ayu').colorscheme()
+    end
+  }
 
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true, 'projekt0n/github-nvim-theme' },
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true, },
     config = function()
-      require('github-theme').setup {
-        theme_style = 'dark',
-        dark_float = true
-      }
 
       require('lualine').setup({
         tabline = {
@@ -30,7 +36,7 @@ return require('packer').startup(function(use)
           lualine_z = { 'branch' }
         },
         options = {
-          theme = "auto",
+          theme = "ayu",
           section_separators = { right = '', left = '' },
           component_separators = { right = '', left = '' },
         }

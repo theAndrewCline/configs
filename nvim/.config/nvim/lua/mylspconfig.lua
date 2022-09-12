@@ -155,3 +155,4 @@ lspconfig.jsonls.setup {
 
 lspconfig.dartls.setup {}
 require'lspconfig'.prismals.setup{}
+require'lspconfig'.sqlls.setup{}
