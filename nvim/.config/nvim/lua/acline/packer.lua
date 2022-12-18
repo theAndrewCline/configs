@@ -54,6 +54,8 @@ require('packer').startup(function(use)
   use 'projekt0n/github-nvim-theme'
   use 'nvim-lualine/lualine.nvim'
 
+  use 'lewis6991/gitsigns.nvim'
+
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {

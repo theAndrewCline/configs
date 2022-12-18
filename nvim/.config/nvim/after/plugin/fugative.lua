@@ -13,3 +13,7 @@ vim.keymap.set('n', '<leader>gP',
   end,
   { desc = '[G]it [P]ush' }
 )
+
+require('gitsigns').setup {
+  current_line_blame = true,
+}
