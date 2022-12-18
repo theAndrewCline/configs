@@ -6,7 +6,7 @@ local nmap = function(key, fn, desc)
 end
 
 nmap('<leader>a', mark.add_file, "[H]arpoon [A]dd mark")
-nmap(ui.toggle_quick_menu, '<leader>hl', "[H]arpoon [U]i")
+nmap('<leader>hl', ui.toggle_quick_menu, "[H]arpoon [U]i")
 
 nmap('<leader>1', function() ui.nav_file(1) end, "[H]arpoon 1")
 nmap('<leader>2', function() ui.nav_file(2) end, "[H]arpoon 2")
