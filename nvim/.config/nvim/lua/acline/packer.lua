@@ -51,7 +51,10 @@ require('packer').startup(function(use)
 
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
-  use 'projekt0n/github-nvim-theme'
+  -- use 'projekt0n/github-nvim-theme'
+  -- use { "ellisonleao/gruvbox.nvim" }
+  use 'junegunn/seoul256.vim'
+
   use 'nvim-lualine/lualine.nvim'
 
   use {
@@ -123,6 +126,8 @@ require('packer').startup(function(use)
       'nvim-lua/plenary.nvim'
     }
   }
+
+  use "rktjmp/lush.nvim"
 
   if is_bootstrap then
     require('packer').sync()
