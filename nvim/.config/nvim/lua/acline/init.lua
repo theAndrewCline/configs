@@ -21,6 +21,8 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 2 -- 2 spaces for tab
 vim.opt.shiftwidth = 2
 
+vim.opt.scrolloff = 8
+
 vim.opt.list = false
 
 vim.opt.termguicolors = true
@@ -36,3 +38,4 @@ vim.opt.grepprg = "rg\\ -S\\ --vimgrep"
 vim.opt.background = "dark"
 
 vim.cmd('packadd cfilter')
+
