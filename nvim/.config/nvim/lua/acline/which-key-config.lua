@@ -5,6 +5,7 @@ wk.register({
   [";"] = { ":Telescope buffers<cr>", "List Buffers" },
   a = { ':lua vim.lsp.buf.code_action()<CR>', 'Code Action' },
   s = { ':Telescope live_grep<cr>', 'Search' },
+  f = { ':ZenMode<cr>', 'Focus' },
   S = { ':PackerSync<cr>', 'Update Plugins' },
   t = { ':Telescope<cr>', 'Telescope' },
   d = { ":DBUIToggle<CR>", "Dadbod Toggle"},

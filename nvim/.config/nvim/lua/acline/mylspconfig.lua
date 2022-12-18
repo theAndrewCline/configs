@@ -1,6 +1,5 @@
 local lspconfig = require("lspconfig")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local null_ls = require("null-ls")
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -36,21 +35,8 @@ local on_attach = function(client, bufnr)
   buf_map(bufnr, 'n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 
   -- buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>")
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-  end
+  -- vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()")
 end
-
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.prettier,
-    -- null_ls.builtins.code_actions.eslint,
-    -- null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.formatting.goimports,
-    null_ls.builtins.formatting.gofmt,
-  },
-  on_attach = on_attach
-})
 
 lspconfig.html.setup {
   capabilities = capabilities
@@ -62,33 +48,6 @@ lspconfig.cssls.setup {
 
 lspconfig.tailwindcss.setup {}
 
--- require 'lspconfig'.denols.setup {
---   capabilities = capabilities,
---   on_attach = function(client, bufnr)
---     client.resolved_capabilities.document_formatting = false
---     client.resolved_capabilities.document_range_formatting = false
---     on_attach(client, bufnr)
---   end,
---   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
--- }
-
-lspconfig.tsserver.setup {
-  init_options = require("nvim-lsp-ts-utils").init_options,
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-    local ts_utils = require("nvim-lsp-ts-utils")
-    ts_utils.setup({})
-    ts_utils.setup_client(client)
-    buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
-    buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
-    buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
-    on_attach(client, bufnr)
-  end,
-  root_dir = lspconfig.util.root_pattern("package.json")
-}
-
 lspconfig.svelte.setup {}
 
 lspconfig.graphql.setup {}
@@ -99,16 +58,6 @@ lspconfig.gopls.setup {
     client.resolved_capabilities.document_range_formatting = false
     on_attach(client, bufnr)
   end
-}
-
-lspconfig.rust_analyzer.setup {
-  settings = {
-    ["rust_analyzer"] = {
-      checkOnSave = {
-        command = "clippy"
-      }
-    }
-  }
 }
 
 lspconfig.dockerls.setup {}
@@ -144,15 +93,45 @@ lspconfig.sumneko_lua.setup {
 }
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-lspconfig.jsonls.setup {
-  on_attach = function(client, bufnr)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-    on_attach(client, bufnr)
-  end,
-  capabilities = capabilities,
-}
+lspconfig.jsonls.setup { capabilities = capabilities }
 
 lspconfig.dartls.setup {}
 require'lspconfig'.prismals.setup{}
 require'lspconfig'.sqlls.setup{}
+
+
+  -----------------------------------------------------------------------------
+  -- DENO PLUGINS
+  -----------------------------------------------------------------------------
+lspconfig.denols.setup {
+  on_attach = on_attach
+}
+  -----------------------------------------------------------------------------
+  -- TYPESCRIPT PLUGINS
+  -----------------------------------------------------------------------------
+
+-- require('typescript').setup({
+--   server = {
+--     on_attach = on_attach
+--   }
+-- })
+
+-- require("typescript").actions.fixAll()
+
+  -----------------------------------------------------------------------------
+  -- RUST PLUGINS
+  -----------------------------------------------------------------------------
+  --
+
+local rt = require("rust-tools")
+
+rt.setup({
+  ["rust-analyzer"] = {
+      checkOnSave = {
+          command = "clippy"
+      },
+  },
+  server = {
+    on_attach = on_attach
+  }
+})

@@ -13,30 +13,20 @@ return require('packer').startup(function(use)
   -- COLORS
   -----------------------------------------------------------------------------
 
-  use {
-    'Shatur/neovim-ayu',
-    config = function ()
-      require('ayu').setup({
-        mirage = false, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
-        overrides = {}, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
-      })
-
-      require('ayu').colorscheme()
-    end
-  }
+  use { 'projekt0n/github-nvim-theme' }
 
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true, },
     config = function()
+      require('github-theme').setup({ theme_style = "dark" })
 
-      require('lualine').setup({
-        tabline = {
+      require('lualine').setup({ tabline = {
           lualine_a = { 'buffers' },
           lualine_z = { 'branch' }
         },
         options = {
-          theme = "ayu",
+          theme = "auto",
           section_separators = { right = '', left = '' },
           component_separators = { right = '', left = '' },
         }
@@ -44,7 +34,27 @@ return require('packer').startup(function(use)
     end
   }
 
-  use { 'folke/lsp-colors.nvim' }
+  use {
+    'folke/lsp-colors.nvim',
+    config = function()
+      require'lsp-colors'.setup({})
+    end
+  }
+
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {}
+    end
+  }
+
+  use {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {}
+    end
+  }
 
   use {
     'kyazdani42/nvim-web-devicons',
@@ -69,16 +79,6 @@ return require('packer').startup(function(use)
   -----------------------------------------------------------------------------
 
   use 'tpope/vim-commentary'
-  use {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    config = function()
-      require 'nvim-treesitter.configs'.setup {
-        context_commentstring = {
-          enable = true
-        }
-      }
-    end
-  }
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
@@ -95,6 +95,13 @@ return require('packer').startup(function(use)
     },
   })
 
+  use {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup {}
+    end
+  }
+
   use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-buffer' }
   use { 'hrsh7th/cmp-path' }
@@ -103,6 +110,12 @@ return require('packer').startup(function(use)
     'hrsh7th/nvim-cmp',
     config = function()
       local cmp = require('cmp')
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+      cmp.event:on(
+        'confirm_done',
+        cmp_autopairs.on_confirm_done()
+      )
 
       cmp.setup({
         snippet = {
@@ -130,7 +143,6 @@ return require('packer').startup(function(use)
     end
   }
 
-  use 'neovim/nvim-lspconfig'
 
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope-fzf-writer.nvim'
@@ -163,11 +175,52 @@ return require('packer').startup(function(use)
     end
   }
 
-  -----------------------------------------------------------------------------
-  -- TYPESCRIPT PLUGINS
-  -----------------------------------------------------------------------------
 
-  use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-  use 'jose-elias-alvarez/null-ls.nvim'
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig"
+  }
 
+  use {
+    'mhartington/formatter.nvim',
+    config = function ()
+      require('formatter').setup({
+        filetype = {
+          typescript = {
+            require('formatter.filetypes.typescript').prettier
+          },
+          javascript = {
+            require('formatter.filetypes.javascript').prettier
+          },
+          typescriptreact = {
+            require('formatter.filetypes.typescriptreact').prettier
+          },
+          javascriptreact = {
+            require('formatter.filetypes.javascriptreact').prettier
+          },
+          json = {
+            require('formatter.filetypes.json').prettier
+          },
+          markdown = {
+            require('formatter.filetypes.markdown').prettier
+          },
+          rust = {
+            function()
+              return {
+                exe = "rustfmt",
+                args = {"--emit=stdout"},
+                stdin = true
+              }
+            end
+          }
+        }
+      })
+    end
+  }
+
+  use 'jose-elias-alvarez/typescript.nvim'
+  use 'simrat39/rust-tools.nvim'
+
+  use 'lewis6991/impatient.nvim'
 end)
