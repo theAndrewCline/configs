@@ -1,7 +1,7 @@
 require('acline.packer')
 require('acline.remap')
 
-vim.opt.nu = true
+vim.o.nu = true
 vim.opt.rnu = true
 
 vim.opt.colorcolumn = '80'
@@ -36,5 +36,3 @@ vim.opt.grepprg = "rg\\ -S\\ --vimgrep"
 vim.opt.background = "dark"
 
 vim.cmd('packadd cfilter')
-
-

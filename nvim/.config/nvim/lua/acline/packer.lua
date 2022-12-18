@@ -54,6 +54,15 @@ require('packer').startup(function(use)
   use 'projekt0n/github-nvim-theme'
   use 'nvim-lualine/lualine.nvim'
 
+  use {
+    'kyazdani42/nvim-web-devicons',
+    config = function()
+      require 'nvim-web-devicons'.setup {
+        default = true;
+      }
+    end
+  }
+
   use 'lewis6991/gitsigns.nvim'
 
   use {
@@ -75,6 +84,36 @@ require('packer').startup(function(use)
       -- Snippets
       {'L3MON4D3/LuaSnip'},
       {'rafamadriz/friendly-snippets'},
+    }
+  }
+
+  use {
+    'folke/lsp-colors.nvim',
+    config = function()
+      require'lsp-colors'.setup{}
+    end
+  }
+
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require'todo-comments'.setup{}
+    end
+  }
+
+  use {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup {}
+    end
+  }
+
+  use {
+    "ThePrimeagen/refactoring.nvim",
+    requires = {
+      {"nvim-lua/plenary.nvim"},
+      {"nvim-treesitter/nvim-treesitter"}
     }
   }
 
