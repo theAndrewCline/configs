@@ -1,9 +1,7 @@
 env:
   TERM: xterm-256color
 
-# background_opacity: 0.85
 window:
-  # decorations: "buttonless"
   padding:
     x: 20
     y: 20
@@ -39,4 +37,4 @@ colors:
     cyan: "#5E8D87"
     magenta: "#85678F"
     blue: "#5F819D"
-    white: "#707880"
+    white: "#c1c0c0"
