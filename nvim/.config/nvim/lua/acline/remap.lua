@@ -1,11 +1,16 @@
-local default_opts = { noremap = true, silent = true }
-
 vim.g.mapleader = ' '
 
-vim.keymap.set('n', '<leader><leader>', '<C-^>', default_opts)
+local function nmap(key, cmd, desc)
+  vim.keymap.set('n', key, cmd, { desc = desc, noremap = true, silent = true})
+end
+
+nmap('<leader><leader>', '<C-^>', "Switch file")
+
+nmap('<leader>n', ':bn<CR>', "Next buffer")
+nmap('<leader>p', ':bp<CR>', "Next buffer")
 
 -- move around splits using Ctrl + {h,j,k,l}
-vim.keymap.set('n', '<C-h>', '<C-w>h', default_opts)
-vim.keymap.set('n', '<C-j>', '<C-w>j', default_opts)
-vim.keymap.set('n', '<C-k>', '<C-w>k', default_opts)
-vim.keymap.set('n', '<C-l>', '<C-w>l', default_opts)
+nmap('<C-h>', '<C-w>h', "Move left split")
+nmap('<C-j>', '<C-w>j', "Move down split")
+nmap('<C-k>', '<C-w>k', "Move up split")
+nmap('<C-l>', '<C-w>l', "Move right split")

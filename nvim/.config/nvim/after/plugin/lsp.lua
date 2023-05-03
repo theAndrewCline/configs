@@ -1,30 +1,29 @@
-local lsp = require('lsp-zero')
+local lsp = require 'lspconfig'
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 vim.opt.signcolumn = 'yes' -- Reserve space for diagnostic icons
 
-lsp.preset('recommended')
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
-lsp.nvim_workspace()
+local diagnostic_signs = {
+  { name = "DiagnosticSignError", text = "●" },
+  { name = "DiagnosticSignWarn",  text = "●" },
+  { name = "DiagnosticSignHint",  text = "●" },
+  { name = "DiagnosticSignInfo",  text = "●" },
+}
 
-lsp.configure('lua', {
-  diagnostics = { globals = { 'vim' } }
-})
+for _, sign in ipairs(diagnostic_signs) do
+  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+end
 
--- LSP settings.
---  This function gets run when an LSP connects to a particular buffer.
-lsp.on_attach(function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+local on_attach = function(client, bufnr)
+  function nmap(map, cmd, desc)
+    vim.keymap.set('n', map, cmd, { desc = desc })
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -45,35 +44,50 @@ lsp.on_attach(function(_, bufnr)
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+
   nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
+end
 
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    if vim.lsp.buf.format then
-      vim.lsp.buf.format()
-    elseif vim.lsp.buf.formatting then
-      vim.lsp.buf.formatting()
-    end
-  end, { desc = 'Format current buffer with LSP' })
-end)
-
-lsp.setup()
-
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
-local diagnostic_signs = {
-  { name = "DiagnosticSignError", text = "●" },
-  { name = "DiagnosticSignWarn", text = "●" },
-  { name = "DiagnosticSignHint", text = "●" },
-  { name = "DiagnosticSignInfo", text = "●" },
+lsp.lua_ls.setup {
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
 }
 
-for _, sign in ipairs(diagnostic_signs) do
-  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
-end
+lsp.denols.setup {
+  on_attach = on_attach,
+  root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
+  capabilities = capabilities
+}
+
+lsp.tsserver.setup {
+  on_attach = on_attach,
+  root_dir = lsp.util.root_pattern("package.json"),
+  single_file_support = false,
+  capabilities = capabilities
+}
+
+lsp.rust_analyzer.setup{
+  on_attach = on_attach,
+  capabilities = capabilities
+}
