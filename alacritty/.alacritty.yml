@@ -11,30 +11,30 @@ use_thin_strokes: true
 font:
   size: 16
   normal:
-    family: "FiraCode Nerd Font"
+    family: 'JetBrainsMono Nerd Font'
     style: Regular
 
 colors:
   primary:
-    background: "#16161e"
-    foreground: "#C5C8C6"
+    background: '#17171c'
+    foreground: '#C5C8C6'
 
   normal:
-    black: "#282a2e"
-    red: "#CC6666"
-    green: "#B5BD68"
-    yellow: "#F0C674"
-    cyan: "#8ABEB7"
-    magenta: "#B294BB"
-    blue: "#81A2BE"
-    white: "#C5C8C6"
+    black: '#17171c'
+    red: '#CC6666'
+    green: '#B5BD68'
+    yellow: '#F0C674'
+    cyan: '#8ABEB7'
+    magenta: '#B294BB'
+    blue: '#81A2BE'
+    white: '#C5C8C6'
 
   bright:
-    black: "#383A3E"
-    red: "#A54242"
-    green: "#8C9440"
-    yellow: "#DE935F"
-    cyan: "#5E8D87"
-    magenta: "#85678F"
-    blue: "#5F819D"
-    white: "#c1c0c0"
+    black: '#383A3E'
+    red: '#A54242'
+    green: '#8C9440'
+    yellow: '#DE935F'
+    cyan: '#5E8D87'
+    magenta: '#85678F'
+    blue: '#5F819D'
+    white: '#C5C8C6'

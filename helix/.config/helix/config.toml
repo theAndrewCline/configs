@@ -1,8 +1,16 @@
-theme = "onedark"
+theme = "base16_transparent"
 
 [editor]
 line-number = "relative"
 auto-format = true
+bufferline = "always"
 
 [editor.cursor-shape]
 insert = "bar"
+
+[editor.statusline]
+center = ["version-control"]
+
+[editor.soft-wrap]
+enable = true
+
