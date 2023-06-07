@@ -1,4 +1,4 @@
-theme = "base16_transparent"
+theme = "cline"
 
 [editor]
 line-number = "relative"
@@ -14,3 +14,6 @@ center = ["version-control"]
 [editor.soft-wrap]
 enable = true
 
+[editor.lsp]
+display-inlay-hints = true
+display-messages = true
