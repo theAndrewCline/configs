@@ -1,4 +1,4 @@
-export EDITOR='hx'
+export EDITOR='nvim'
 
 fpath=(~/.zsh $fpath)
 
