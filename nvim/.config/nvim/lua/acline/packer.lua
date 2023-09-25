@@ -51,10 +51,14 @@ require('packer').startup(function(use)
 
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
-  use({ 'rose-pine/neovim', as = 'rose-pine' })
+  -- use({ 'rose-pine/neovim', as = 'rose-pine' })
   -- use 'projekt0n/github-nvim-theme'
   -- use { "ellisonleao/gruvbox.nvim" }
-  -- use 'junegunn/seoul256.vim'
+  use 'junegunn/seoul256.vim'
+  -- use 'tjdevries/colorbuddy.nvim'
+  -- use 'bbenzikry/snazzybuddy.nvim'
+  -- use { "catppuccin/nvim", as = "catppuccin" }
+  -- use { "Shatur/neovim-ayu" }
 
   use 'nvim-lualine/lualine.nvim'
 
@@ -72,6 +76,9 @@ require('packer').startup(function(use)
   -- LSP Support
   use { 'neovim/nvim-lspconfig' }
   use { 'williamboman/mason.nvim' }
+
+  -- RUST
+  use 'simrat39/rust-tools.nvim'
 
   -- Autocompletion
   use { 'hrsh7th/nvim-cmp' }
@@ -127,6 +134,21 @@ require('packer').startup(function(use)
   use "jose-elias-alvarez/null-ls.nvim"
 
   use "MunifTanjim/prettier.nvim"
+
+  use "github/copilot.vim"
+
+  use {
+    'akinsho/bufferline.nvim',
+    tag = "*",
+  }
+
+  use({
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  })
 
   if is_bootstrap then
     require('packer').sync()

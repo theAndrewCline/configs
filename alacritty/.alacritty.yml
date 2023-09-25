@@ -2,57 +2,47 @@ env:
   TERM: xterm-256color
 
 window:
+  decorations: Buttonless
   opacity: 1
   padding:
     x: 20
     y: 20
+  startup_mode: Maximized
+  opt_as_alt: Both
 
 use_thin_strokes: true
 
 font:
-  size: 16
+  size: 18
   normal:
-    family: "JetBrainsMono Nerd Font"
+    family: "Hack Nerd Font"
     style: Regular
 
 colors:
+  # Default colors
   primary:
-    background: "0x191724"
-    foreground: "0xe0def4"
-  cursor:
-    text: "0xe0def4"
-    cursor: "0x524f67"
-  vi_mode_cursor:
-    text: "0xe0def4"
-    cursor: "0x524f67"
-  line_indicator:
-    foreground: None
-    background: None
-  selection:
-    text: "0xe0def4"
-    background: "0x403d52"
+    background: "#0A0E14"
+    foreground: "#B3B1AD"
+
+  # Normal colors
   normal:
-    black: "0x26233a"
-    red: "0xeb6f92"
-    green: "0x31748f"
-    yellow: "0xf6c177"
-    blue: "0x9ccfd8"
-    magenta: "0xc4a7e7"
-    cyan: "0xebbcba"
-    white: "0xe0def4"
+    black: "#01060E"
+    red: "#EA6C73"
+    green: "#91B362"
+    yellow: "#F9AF4F"
+    blue: "#53BDFA"
+    magenta: "#FAE994"
+    cyan: "#90E1C6"
+    white: "#C7C7C7"
+
+  # Bright colors
   bright:
-    black: "0x6e6a86"
-    red: "0xeb6f92"
-    green: "0x31748f"
-    yellow: "0xf6c177"
-    blue: "0x9ccfd8"
-    magenta: "0xc4a7e7"
-    cyan: "0xebbcba"
-    white: "0xe0def4"
-  hints:
-    start:
-      foreground: "#908caa"
-      background: "#1f1d2e"
-    end:
-      foreground: "#6e6a86"
-      background: "#1f1d2e"
+    black: "#686868"
+    red: "#F07178"
+    green: "#C2D94C"
+    yellow: "#FFB454"
+    blue: "#59C2FF"
+    magenta: "#FFEE99"
+    cyan: "#95E6CB"
+    white: "#FFFFFF"
+theme: Ayu-Dark

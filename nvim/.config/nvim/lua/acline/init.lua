@@ -7,7 +7,7 @@ vim.opt.rnu = true
 vim.opt.colorcolumn = '80'
 vim.opt.cursorline = true
 vim.opt.foldmethod = 'indent'
-vim.opt.foldlevel = 99 -- all folds open by default
+vim.opt.foldlevel = 99       -- all folds open by default
 vim.opt.inccommand = 'split' -- show a preview of the changes by norm command
 vim.opt.mouse = 'a'
 vim.opt.encoding = 'utf-8'
@@ -37,5 +37,7 @@ vim.opt.grepprg = "rg\\ -S\\ --vimgrep"
 
 vim.opt.background = "dark"
 
-vim.cmd('packadd cfilter')
+vim.opt.spell = true
+vim.opt.spelllang = "en_us"
 
+vim.cmd('packadd cfilter')

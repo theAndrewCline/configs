@@ -1,8 +1,9 @@
 export EDITOR='nvim'
 
 fpath=(~/.zsh $fpath)
+fpath=(~/.zsh/plugins $fpath)
 
-autoload bashcompinit && bashcompinit
+utoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit -u
 
 fpath+=/opt/homebrew/share/zsh/site-functions
@@ -19,7 +20,6 @@ export PATH=~/configs/scripts:$PATH
 export PATH=~/go/bin:$PATH
 export PATH="/Users/acline/.deno/bin:$PATH"
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND="rg --files"
@@ -31,12 +31,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/lib
 
 alias python=python3
-
-alias z=zellij
 
 alias work="timer 30m && terminal-notifier -message 'Pomodoro'\
         -title 'Work Timer is up! Take a Break 😊'\
@@ -49,6 +46,3 @@ alias rest="timer 10m && terminal-notifier -message 'Pomodoro'\
         -sound Crystal"
 
 eval "$(starship init zsh)"
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform

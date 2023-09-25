@@ -1,0 +1,11 @@
+-- local bufferline = require("bufferline")
+
+-- bufferline.setup {
+--   options = {
+--     style_preset = bufferline.style_preset.minimal,
+--     show_buffer_close_icons = false,
+--     show_buffer_icons = false,
+--     color_icons = false,
+--     diagnostics = "nvim_lsp",
+--   }
+-- }

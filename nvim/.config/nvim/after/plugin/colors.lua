@@ -1,2 +1,5 @@
+vim.g.seoul256_background = 234
 
-vim.cmd('colorscheme rose-pine')
+vim.cmd [[set termguicolors]]
+vim.cmd [[set background=dark]]
+vim.cmd [[ colorscheme seoul256]]

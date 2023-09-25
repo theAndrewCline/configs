@@ -26,8 +26,8 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', map, cmd, { desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>r', vim.lsp.buf.rename, '[R]ename')
+  nmap('<leader>a', vim.lsp.buf.code_action, 'Code [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -38,7 +38,7 @@ local on_attach = function(client, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>k', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -60,7 +60,7 @@ lsp.lua_ls.setup {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = { 'vim' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -74,11 +74,11 @@ lsp.lua_ls.setup {
   },
 }
 
-lsp.denols.setup {
-  on_attach = on_attach,
-  root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
-  capabilities = capabilities
-}
+-- lsp.denols.setup {
+--   on_attach = on_attach,
+--   root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
+--   capabilities = capabilities
+-- }
 
 lsp.tsserver.setup {
   on_attach = on_attach,
@@ -87,7 +87,31 @@ lsp.tsserver.setup {
   capabilities = capabilities
 }
 
-lsp.rust_analyzer.setup{
+lsp.rust_analyzer.setup {
   on_attach = on_attach,
-  capabilities = capabilities
+  capabilities = capabilities,
+}
+
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  },
+})
+
+lsp.marksman.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+lsp.nil_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+lsp.gopls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
 }
