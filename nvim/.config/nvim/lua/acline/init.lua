@@ -1,8 +1,7 @@
-require('acline.packer')
 require('acline.remap')
 
-vim.o.nu = true
-vim.opt.rnu = true
+-- vim.o.nu = true
+-- vim.opt.rnu = true
 
 vim.opt.colorcolumn = '80'
 vim.opt.cursorline = true
@@ -15,6 +14,8 @@ vim.opt.ruler = true
 vim.opt.updatetime = 300 -- faster completions
 vim.opt.timeoutlen = 500
 vim.opt.wrap = false
+
+vim.opt.conceallevel = 1
 
 vim.opt.smarttab = true
 vim.opt.expandtab = true
@@ -31,7 +32,7 @@ vim.opt.listchars = {
   space = '⋅'
 }
 
-vim.opt.completeopt = 'menuone,noselect'
+-- vim.opt.completeopt = 'menuone,noselect'
 vim.opt.rtp = vim.opt.rtp + '~/.fzf'
 vim.opt.grepprg = "rg\\ -S\\ --vimgrep"
 
