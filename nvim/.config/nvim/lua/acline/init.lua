@@ -1,7 +1,7 @@
 require('acline.remap')
 
--- vim.o.nu = true
--- vim.opt.rnu = true
+vim.o.nu = true
+vim.opt.rnu = true
 
 vim.opt.colorcolumn = '80'
 vim.opt.cursorline = true
@@ -42,3 +42,5 @@ vim.opt.spell = true
 vim.opt.spelllang = "en_us"
 
 vim.cmd('packadd cfilter')
+vim.g.sierra_Midnight = 1
+vim.cmd('colorscheme sierra')

@@ -40,35 +40,35 @@
 -- base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
 
 return {
-  "echasnovski/mini.base16",
-  version = '*',
-  lazy = false,
-  priority = 1000,
-  config = function()
-    local base16 = require('mini.base16')
-    local palette = {
-      base00 = '#111111',
-      base01 = '#181818',
-      base02 = '#373b41',
-      base03 = '#969896',
-      base04 = '#c5c8c6',
-      base05 = '#F2F3F4',
-      base06 = '#81a2be',
-      base07 = '#c5c8c6',
-      base08 = '#CCE6EF',
-      base09 = '#de935f',
-      base0A = '#81a2be',
-      base0B = '#FFF1C6',
-      base0C = '#E6B673',
-      base0D = '#f0c674',
-      base0E = '#F07178',
-      base0F = '#A9D4F9',
-    }
-
-    base16.setup({
-      palette = palette,
-      use_cterm = true,
-      plugins = { default = true },
-    })
-  end
+  -- "echasnovski/mini.base16",
+  -- version = '*',
+  -- lazy = false,
+  -- priority = 1000,
+  -- config = function()
+  --   local base16 = require('mini.base16')
+  --   local palette = {
+  --     base00 = '#111111',
+  --     base01 = '#181818',
+  --     base02 = '#373b41',
+  --     base03 = '#969896',
+  --     base04 = '#c5c8c6',
+  --     base05 = '#F2F3F4',
+  --     base06 = '#81a2be',
+  --     base07 = '#c5c8c6',
+  --     base08 = '#CCE6EF',
+  --     base09 = '#de935f',
+  --     base0A = '#81a2be',
+  --     base0B = '#FFF1C6',
+  --     base0C = '#E6B673',
+  --     base0D = '#f0c674',
+  --     base0E = '#F07178',
+  --     base0F = '#A9D4F9',
+  --   }
+  --
+  --   base16.setup({
+  --     palette = palette,
+  --     use_cterm = true,
+  --     plugins = { default = true },
+  --   })
+  -- end
 }

@@ -16,49 +16,41 @@ use_thin_strokes: true
 font:
   size: 18
   normal:
-    family: "SauceCodePro Nerd Font Mono"
+    family: "MesloLGS Nerd Font"
     style: Regular
 
   bold:
-    family: "SauceCodePro Nerd Font Mono"
+    family: "MesloLGS Nerd Font"
     style: Bold
 
   italic:
-    family: "SauceCodePro Nerd Font Mono"
+    family: "MesloLGS Nerd Font"
     style: Light
 
 colors:
   primary:
-    background: "#111111"
-    foreground: "#F2F3F4"
-    dim_foreground: "#c5c8c6"
+    background: "#121212"
+    foreground: "#d0d0d0"
+    # dim_foreground: "#c5c8c6"
+    dim_foreground: "#4e4e4e"
     bright_foreground: "#F2F3F4"
 
   normal:
     black: "#111111"
-    red: "#F07178"
-    green: "#79AE70"
-    yellow: "#f0c674"
-    blue: "#81a2be"
-    magenta: "#9F97B2"
-    cyan: "#6FCBCB"
-    white: "#c5c8c6"
+    red: "#D75F5F"
+    green: "#5F8787"
+    yellow: "#DFAF5F"
+    blue: "#5F87AF"
+    magenta: "#AF8787"
+    cyan: "#87AFAF"
+    white: "#BFBFBF"
 
   bright:
-    black: "#797B7A"
-    red: "#FAC6C9"
-    green: "#C3E3BE"
-    yellow: "#FFF1C6"
-    blue: "#A9D4F9"
-    magenta: "#E0D8F4"
-    cyan: "#CCE6EF"
-    white: "#F2F3F4"
-  dim:
-    black: "#c5c8c6"
-    red: "#F07178"
-    green: "#79AE70"
-    yellow: "#f0c674"
-    blue: "#81a2be"
-    magenta: "#9F97B2"
-    cyan: "#6FCBCB"
-    white: "#c5c8c6"
+    black: "#3a3a3a"
+    red: "#D75F5F"
+    green: "#5F8787"
+    yellow: "#DFAF5F"
+    blue: "#5F87AF"
+    magenta: "#AF8787"
+    cyan: "#87AFAF"
+    white: "#E5E5E5"

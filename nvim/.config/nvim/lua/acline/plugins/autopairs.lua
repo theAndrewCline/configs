@@ -2,8 +2,9 @@
 --   'windwp/nvim-autopairs',
 --   opts = {}
 -- }
-return {
-  'echasnovski/mini.pairs',
-  version = '*',
-  opts = {}
-}
+-- return {
+--   'echasnovski/mini.pairs',
+--   version = '*',
+--   opts = {}
+-- }
+return {}
