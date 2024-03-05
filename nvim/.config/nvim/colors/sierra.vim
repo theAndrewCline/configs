@@ -75,7 +75,7 @@ highlight! link cssTagName Cyan
 highlight! link vimUserFunc Cyan
 highlight! link Function Cyan
 highlight! link vimFunction Cyan
-highlight! link Identifier Cyan
+highlight! link Identifier Normal
 highlight! link vimAutoEventList Cyan
 
 "CYAN_REVERSE:
@@ -124,7 +124,7 @@ highlight! link Constant Red_Dark
 highlight! Red_Medium guifg=#d78787 guibg=NONE gui=NONE ctermfg=174 ctermbg=NONE cterm=NONE
 highlight! link htmlArg Red_Medium
 highlight! link Number Red_Medium
-highlight! link Type Red_Medium
+highlight! link Type Cyan
 
 highlight! Red_Light guifg=#dfafaf guibg=NONE gui=NONE ctermfg=181 ctermbg=NONE cterm=NONE
 highlight! link String Red_Light
