@@ -19,7 +19,8 @@ vim.opt.conceallevel = 1
 
 vim.opt.smarttab = true
 vim.opt.expandtab = true
-vim.opt.tabstop = 2 -- 2 spaces for tab
+vim.opt.tabstop = 2     -- 2 spaces for tab
+vim.opt.softtabstop = 2 -- 2 spaces for tab
 vim.opt.shiftwidth = 2
 
 vim.opt.scrolloff = 8
@@ -38,7 +39,7 @@ vim.opt.grepprg = "rg\\ -S\\ --vimgrep"
 
 vim.opt.background = "dark"
 
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelllang = "en_us"
 
 vim.cmd('packadd cfilter')
