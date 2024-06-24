@@ -287,6 +287,7 @@
       core = {
         editor = "hx";
       };
+      push.autoSetupRemote = true;
       url = {
         "ssh://git@git.2020.dev/" = {
            insteadOf = "https://git.2020.dev/";
