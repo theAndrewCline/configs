@@ -4,3 +4,5 @@ nvim/autoload
 nvim/plugin
 
 nvim/.config/nvim/plugin/*
+
+**/aws_configs.nix
