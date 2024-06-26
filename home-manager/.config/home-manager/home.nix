@@ -17,28 +17,32 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    pkgs.stow
-    pkgs.nodejs
-    pkgs.deno
-    pkgs.yarn-berry
-    pkgs.mods
-    pkgs.go
-    pkgs.cargo
-    pkgs.postgresql_14
-    pkgs.nil
-    pkgs.speedtest-rs
-    pkgs.monaspace
-    pkgs.gh
-    pkgs.glab
-    pkgs.bat
-    pkgs.eza
+  home.packages = with pkgs; [
+    stow
+    httpie
+    nodejs
+    deno
+    yarn-berry
+    mods
+    go
+    cargo
+    rustfmt
+    postgresql_14
+    nil
+    speedtest-rs
+    monaspace
+    gh
+    glab
+    bat
+    eza
+    ripgrep
+    protobuf
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -55,7 +59,6 @@
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
-
   };
 
   # Home Manager can also manage your environment variables through
@@ -82,13 +85,12 @@
     x = "exit";
     lg = "lazygit";
     hms = "home-manager switch";
-    z = "zellij";
   };
 
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/go/bin"
-    "$HOME/configs/scripts"
+    "$HOME/configs/scripts/.scripts"
   ];
 
   # Let Home Manager install and manage itself.
@@ -100,9 +102,14 @@
     syntaxHighlighting.enable = true;
   };
 
-  programs.oh-my-posh = {
+  programs.starship = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  programs.oh-my-posh = {
+    enable = false;
+    enableZshIntegration = false;
     settings = {
       "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json";
       final_space = true;
@@ -195,29 +202,39 @@
     enableZshIntegration = true;
   };
 
-  programs.zellij = {
-    enable = true;
-    # enableZshIntegration = true;
-    settings = {
-      theme = "cline";
-      themes.cline = {
-        fg = "#FFFFFF";
-        bg = "#1c1b1b";
-        black = "#1c1b1b";
-        red = "#BF616A";
-        green = "#A3BE8C";
-        yellow = "#EBCB8B";
-        blue = "#81A1C1";
-        magenta = "#B48EAD";
-        cyan = "#88C0D0";
-        white = "#E5E9F0";
-        orange = "#D08770";
-      };
-      simplified_ui = true;
-      default_layout = "compact";
-      pane_frames = false;
-    };
-  };
+  # programs.zellij = {
+  #   enable = true;
+  #   enableZshIntegration = true;
+  #   settings = {
+  #     theme = "cline";
+  #     themes.cline = {
+  #       fg = "#FFFFFF";
+  #       bg = "#1c1b1b";
+  #       black = "#1c1b1b";
+  #       red = "#BF616A";
+  #       green = "#A3BE8C";
+  #       yellow = "#EBCB8B";
+  #       blue = "#81A1C1";
+  #       magenta = "#B48EAD";
+  #       cyan = "#88C0D0";
+  #       white = "#E5E9F0";
+  #       orange = "#D08770";
+  #     };
+  #     simplified_ui = true;
+  #     default_layout = "compact";
+  #     pane_frames = false;
+
+  #     keybindings = {
+  #       "shared_except \"locked\"" = {
+  #         "bind \"Alt f\"" = {
+  #           "LaunchPlugin \"filepicker\"" = {
+  #             close_on_selection = true;
+  #           };
+  #         };
+  #       };
+  #     };
+  #   };
+  # };
 
   programs.wezterm = {
     enable = true;
@@ -240,11 +257,13 @@
   programs.helix = {
     enable = true;
     defaultEditor = true;
-    extraPackages = [ 
-      pkgs.marksman
-      pkgs.gopls
-      pkgs.nodePackages.typescript-language-server
-      pkgs.vscode-langservers-extracted
+    extraPackages = with pkgs; [ 
+      marksman
+      gopls
+      nodePackages.typescript-language-server
+      vscode-langservers-extracted
+      bash-language-server
+      rust-analyzer
     ];
     settings = {
       theme = "custom";
@@ -277,6 +296,30 @@
         "ui.linenr" = "white dim";
       };
     };
+    languages = {
+      language-server.deno-lsp = {
+        command = "deno";
+        args = ["lsp"];
+        config.deno.enable = true;
+      };
+      language = [
+        {
+          name = "typescript";
+          scope = "source.ts";
+          shebangs = ["deno"];
+          roots = ["deno.json" "deno.jsonc"];
+          file-types = ["ts" "js" "tsx"];
+          language-servers = ["deno-lsp"];
+          auto-format = true;
+        }
+
+        {
+          name = "rust";
+          auto-format = true;
+          language-servers = ["rust-analyzer"];
+        }
+      ];
+    };
   };
 
   programs.git = {
@@ -294,6 +337,54 @@
         };
       };
     };
+  };
+
+  programs.tmux = {
+    enable = true;
+    mouse = true;
+    keyMode = "vi";
+    prefix = "C-a";
+    escapeTime = 0;
+    historyLimit = 5000;
+    baseIndex = 1;
+    terminal = "tmux-256color";
+    plugins = with pkgs; [
+      tmuxPlugins.yank
+    ];
+    extraConfig = "
+        bind-key -n M-h \"select-pane -L\"
+        bind-key -n M-j \"select-pane -D\"
+        bind-key -n M-k \"select-pane -U\"
+        bind-key -n M-l \"select-pane -R\"
+
+        bind-key -T copy-mode-vi M-h select-pane -L
+        bind-key -T copy-mode-vi M-j select-pane -D
+        bind-key -T copy-mode-vi M-k select-pane -U
+        bind-key -T copy-mode-vi M-l select-pane -R
+
+        set -g pane-border-style 'fg=colour7 bg=#1c1b1b'
+        set -g pane-active-border-style 'bg=#1c1b1b fg=colour14'
+
+        # statusbar
+        set -g status-position bottom
+        set -g status-justify left
+        set -g status-style 'bg=#1c1b1b fg=colour7 dim' # 'dim' maybe added here
+        set -g status-left \"\"
+
+        set -g status-right \"#S\"
+
+        setw -g window-status-current-style 'fg=colour7  bg=#1c1b1b bold'
+        setw -g window-status-current-format \" #I:#W#F \"
+
+        setw -g window-status-style 'fg=colour7 bg=#1c1b1b'
+        setw -g window-status-format ' #I:#W#F '
+
+        setw -g window-status-bell-style 'fg=colour0 bg=colour7 bold'
+
+        # messages
+        set -g message-style 'fg=colour0 bg=colour3 bold'
+
+    ";
   };
 
   programs.lazygit = { 
