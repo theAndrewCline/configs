@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
-{
+let
+  unstable = import <unstable> { config.allowUnfree = true; };
+  stable = import <stable> { config.allowUnfree = true; };
+
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "cline";
@@ -17,32 +21,48 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
-    stow
-    httpie
-    nodejs
-    deno
-    yarn-berry
-    mods
-    go
-    cargo
-    rustfmt
-    postgresql_14
-    nil
-    speedtest-rs
-    monaspace
-    gh
-    glab
-    bat
-    eza
-    ripgrep
-    protobuf
+  home.packages = [
+    pkgs.stow
+    pkgs.openssl
+    pkgs.httpie
+    pkgs.atuin
+    pkgs.nodejs
+    pkgs.pnpm
+    pkgs.deno
+    pkgs.yarn-berry
+    pkgs.mods
+    pkgs.go
+    pkgs.rustup
+    pkgs.marksman
+    pkgs.gopls
+    pkgs.nodePackages.prettier
+    pkgs.nodePackages.typescript-language-server
+    pkgs.vscode-langservers-extracted
+    pkgs.bash-language-server
+    pkgs.postgresql_14
+    pkgs.nil
+    pkgs.speedtest-rs
+    pkgs.monaspace
+    pkgs.gh
+    pkgs.glab
+    pkgs.bat
+    pkgs.eza
+    pkgs.ripgrep
+    pkgs.protobuf
+    pkgs.jq
+    pkgs.yq
+    pkgs.fx
+    pkgs.fd
+    pkgs.tldr
+    pkgs.localstack
+    stable.lazydocker
+    pkgs.nixfmt
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -78,81 +98,68 @@
   #  /etc/profiles/per-user/cline/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "hx";
+    EDITOR = "nvim";
+    NPM_CONFIG_PREFIX = "~/.local";
   };
 
   home.shellAliases = {
     x = "exit";
     lg = "lazygit";
     hms = "home-manager switch";
+    v = "nvim";
   };
 
-  home.sessionPath = [
-    "$HOME/.local/bin"
-    "$HOME/go/bin"
-    "$HOME/configs/scripts/.scripts"
-  ];
+  home.sessionPath =
+    [ "$HOME/.local/bin" "$HOME/go/bin" "$HOME/configs/scripts/.scripts" ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.zsh = {
     enable = true;
-    # enableCompletion = true;
+    enableCompletion = true;
     syntaxHighlighting.enable = true;
+    history.ignoreDups = true;
+    initExtraBeforeCompInit = "autoload bashcompinit && bashcompinit";
+    initExtra =
+      "\n      complete -C 'aws_completer' aws\n      autoload -z edit-command-line\n      zle -N edit-command-line\n      bindkey \"^X^E\" edit-command-line\n    ";
   };
 
-  programs.starship = {
+  programs.atuin = {
     enable = true;
     enableZshIntegration = true;
+    flags = [ "--disable-up-arrow" ];
   };
 
   programs.oh-my-posh = {
-    enable = false;
-    enableZshIntegration = false;
+    enable = true;
+    enableZshIntegration = true;
     settings = {
-      "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json";
+      "$schema" =
+        "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json";
       final_space = true;
       version = 2;
       blocks = [
         {
-          type = "rprompt";
-          overflow = "hidden";
-          alignment = "right";
-          segments = [
-            {
-              type = "executiontime";
-              style = "plain";
-              foreground = "light-yellow";
-              background = "transparent";
-              template = "{{ .FormattedMs }}";
-              properties = {
-                threshold = 5000;
-              };
-            }
-          ];
-          
-        }
-        { 
           type = "prompt";
           alignment = "left";
+          newline = true;
           segments = [
             {
               type = "path";
               style = "plain";
               foreground = "cyan";
               background = "transparent";
-              properties = {
-                style = "agnoster_short";
-              };
+              properties = { style = "full"; };
               template = "{{ .Path }} ";
             }
             {
+              type = "git";
+              style = "plain";
               background = "transparent";
               foreground = "#5b5f66";
-              style = "plain";
-              template = "{{ .HEAD }}{{if or (.Working.Changed) (.Staging.Changed)}}*{{end}} ";
-              type = "git";
+              template =
+                " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</> ";
               properties = {
                 branch_icon = "";
                 fetch_status = true;
@@ -165,106 +172,79 @@
               foreground = "yellow";
               background = "transparent";
               template = "  {{.Profile}}";
-            }          
+            }
           ];
         }
+
+        {
+          type = "rprompt";
+          overflow = "hidden";
+          alignment = "right";
+          segments = [{
+            type = "executiontime";
+            style = "plain";
+            foreground = "lightYellow";
+            background = "transparent";
+            template = "{{ .FormattedMs }}";
+            properties = { threshold = 5000; };
+          }];
+        }
+
         {
           type = "prompt";
           alignment = "left";
           newline = true;
-          segments = [
-            {
-              type = "text";
-              style = "plain";
-              foreground_templates = [
-                "{{if gt .Code 0}}red{{end}}"
-                "{{if eq .Code 0}}blue{{end}}"
-              ];
-              template = "";
-            }
-          ];
+          segments = [{
+            type = "text";
+            style = "plain";
+            foreground_templates =
+              [ "{{if gt .Code 0}}red{{end}}" "{{if eq .Code 0}}blue{{end}}" ];
+            template = "❯";
+          }];
         }
       ];
       transient_prompt = {
         background = "transparent";
-        template = " ";
-        newline = true;
-        foreground_templates = [
-          "{{if gt .Code 0}}red{{end}}"
-          "{{if eq .Code 0}}blue{{end}}"
-        ];
+        template = "❯ ";
+        foreground_templates =
+          [ "{{if gt .Code 0}}red{{end}}" "{{if eq .Code 0}}blue{{end}}" ];
       };
     };
   };
 
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  # programs.zellij = {
-  #   enable = true;
-  #   enableZshIntegration = true;
-  #   settings = {
-  #     theme = "cline";
-  #     themes.cline = {
-  #       fg = "#FFFFFF";
-  #       bg = "#1c1b1b";
-  #       black = "#1c1b1b";
-  #       red = "#BF616A";
-  #       green = "#A3BE8C";
-  #       yellow = "#EBCB8B";
-  #       blue = "#81A1C1";
-  #       magenta = "#B48EAD";
-  #       cyan = "#88C0D0";
-  #       white = "#E5E9F0";
-  #       orange = "#D08770";
-  #     };
-  #     simplified_ui = true;
-  #     default_layout = "compact";
-  #     pane_frames = false;
-
-  #     keybindings = {
-  #       "shared_except \"locked\"" = {
-  #         "bind \"Alt f\"" = {
-  #           "LaunchPlugin \"filepicker\"" = {
-  #             close_on_selection = true;
-  #           };
-  #         };
-  #       };
-  #     };
-  #   };
-  # };
+  programs.fzf = { enable = true; };
 
   programs.wezterm = {
     enable = true;
+    package = stable.wezterm;
 
     extraConfig = ''
-    local wezterm = require 'wezterm'
-    local config = wezterm.config_builder()
-    config.color_scheme = 'Seoul256 (Gogh)'
-    config.colors = {
-      background = "#1c1b1b"
-    }
-    config.enable_tab_bar = false
-    config.font_size = 20
-    config.font = wezterm.font 'JetBrainsMono Nerd Font'
-    config.harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' }
-    return config
+      local wezterm = require 'wezterm'
+      local config = wezterm.config_builder()
+      config.color_scheme = 'Seoul256 (Gogh)'
+      config.colors = {
+        background = "#15181A"
+      }
+      config.window_padding = {
+        left = '20pt',
+        right = '20pt',
+        top = '10pt',
+        bottom = '-10pt',
+      }
+      config.window_close_confirmation = 'NeverPrompt'
+      config.enable_tab_bar = false
+      config.font_size = 18
+      config.font = wezterm.font 'JetBrainsMono Nerd Font'
+      config.harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' }
+      config.send_composed_key_when_left_alt_is_pressed = false
+      config.send_composed_key_when_right_alt_is_pressed = false
+      return config
     '';
   };
 
   programs.helix = {
     enable = true;
-    defaultEditor = true;
-    extraPackages = with pkgs; [ 
-      marksman
-      gopls
-      nodePackages.typescript-language-server
-      vscode-langservers-extracted
-      bash-language-server
-      rust-analyzer
-    ];
+    defaultEditor = false;
     settings = {
       theme = "custom";
       editor = {
@@ -272,7 +252,7 @@
         auto-format = true;
         bufferline = "always";
         cursor-shape.insert = "bar";
-        statusline.center = ["version-control"];
+        statusline.center = [ "version-control" ];
         soft-wrap.enable = true;
         lsp = {
           # display-inlay-hints = true;
@@ -292,34 +272,93 @@
         string = "light-yellow";
         "string.special" = "light-green";
         comment = "green";
-        "comment.modifiers" = ["italic"];
+        "comment.modifiers" = [ "italic" ];
         "ui.linenr" = "white dim";
       };
     };
     languages = {
-      language-server.deno-lsp = {
-        command = "deno";
-        args = ["lsp"];
-        config.deno.enable = true;
-      };
+      # language-server.deno-lsp = {
+      #   command = "deno";
+      #   args = ["lsp"];
+      #   config.deno.enable = true;
+      # };
       language = [
+        # {
+        #   name = "typescript";
+        #   scope = "source.ts";
+        #   shebangs = ["deno"];
+        #   roots = ["deno.json" "deno.jsonc"];
+        #   file-types = ["ts" "js" "tsx"];
+        #   language-servers = ["deno-lsp"];
+        #   auto-format = true;
+        # }
+
         {
           name = "typescript";
-          scope = "source.ts";
-          shebangs = ["deno"];
-          roots = ["deno.json" "deno.jsonc"];
-          file-types = ["ts" "js" "tsx"];
-          language-servers = ["deno-lsp"];
+          formatter = {
+            command = "prettier";
+            args = [ "--parser" "typescript" ];
+          };
+          auto-format = true;
+        }
+
+        {
+          name = "tsx";
+          formatter = {
+            command = "prettier";
+            args = [ "--parser" "typescript" ];
+          };
+          auto-format = true;
+        }
+
+        {
+          name = "javascript";
+          formatter = {
+            command = "prettier";
+            args = [ "--parser" "javascript" ];
+          };
+          auto-format = true;
+        }
+
+        {
+          name = "javascript";
+          formatter = {
+            command = "prettier";
+            args = [ "--parser" "javascript" ];
+          };
+          auto-format = true;
+        }
+
+        {
+          name = "html";
+          formatter = {
+            command = "prettier";
+            args = [ "--parser" "html" ];
+          };
+          auto-format = true;
+        }
+
+        {
+          name = "json";
+          formatter = {
+            command = "prettier";
+            args = [ "--parser" "json" ];
+          };
           auto-format = true;
         }
 
         {
           name = "rust";
           auto-format = true;
-          language-servers = ["rust-analyzer"];
+          language-servers = [ "rust-analyzer" ];
         }
       ];
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
   };
 
   programs.git = {
@@ -327,14 +366,11 @@
     userEmail = "acline@precisionplanting.com";
     userName = "Andrew Cline";
     extraConfig = {
-      core = {
-        editor = "hx";
-      };
+      init.defaultBranch = "main";
+      core = { editor = "nvim"; };
       push.autoSetupRemote = true;
       url = {
-        "ssh://git@git.2020.dev/" = {
-           insteadOf = "https://git.2020.dev/";
-        };
+        "ssh://git@git.2020.dev/" = { insteadOf = "https://git.2020.dev/"; };
       };
     };
   };
@@ -348,54 +384,30 @@
     historyLimit = 5000;
     baseIndex = 1;
     terminal = "tmux-256color";
-    plugins = with pkgs; [
-      tmuxPlugins.yank
-    ];
-    extraConfig = "
-        bind-key -n M-h \"select-pane -L\"
-        bind-key -n M-j \"select-pane -D\"
-        bind-key -n M-k \"select-pane -U\"
-        bind-key -n M-l \"select-pane -R\"
-
-        bind-key -T copy-mode-vi M-h select-pane -L
-        bind-key -T copy-mode-vi M-j select-pane -D
-        bind-key -T copy-mode-vi M-k select-pane -U
-        bind-key -T copy-mode-vi M-l select-pane -R
-
-        set -g pane-border-style 'fg=colour7 bg=#1c1b1b'
-        set -g pane-active-border-style 'bg=#1c1b1b fg=colour14'
-
-        # statusbar
-        set -g status-position bottom
-        set -g status-justify left
-        set -g status-style 'bg=#1c1b1b fg=colour7 dim' # 'dim' maybe added here
-        set -g status-left \"\"
-
-        set -g status-right \"#S\"
-
-        setw -g window-status-current-style 'fg=colour7  bg=#1c1b1b bold'
-        setw -g window-status-current-format \" #I:#W#F \"
-
-        setw -g window-status-style 'fg=colour7 bg=#1c1b1b'
-        setw -g window-status-format ' #I:#W#F '
-
-        setw -g window-status-bell-style 'fg=colour0 bg=colour7 bold'
-
-        # messages
-        set -g message-style 'fg=colour0 bg=colour3 bold'
-
-    ";
+    plugins = with pkgs; [ tmuxPlugins.yank tmuxPlugins.vim-tmux-navigator ];
+    extraConfig =
+      "\n        set -g pane-border-style 'fg=colour7 bg=#15181A'\n        set -g pane-active-border-style 'bg=#15181A fg=colour14'\n\n        # statusbar\n        set -g status-position bottom\n        set -g status-justify left\n        set -g status-style 'bg=#15181A fg=colour7 dim' # 'dim' maybe added here\n        set -g status-left \"\"\n\n        set -g status-right \"#S\"\n\n        setw -g window-status-current-style 'fg=colour7  bg=#15181A bold'\n        setw -g window-status-current-format \" #I:#W#F \"\n\n        setw -g window-status-style 'fg=colour7 bg=#15181A' \n        setw -g window-status-format ' #I:#W#F '\n        set-option -a terminal-features 'xterm-256color:RGB'\n\n        setw -g window-status-bell-style 'fg=colour0 bg=colour7 bold'\n\n        # messages\n        set -g message-style 'fg=colour0 bg=colour3 bold'\n\n    ";
   };
 
-  programs.lazygit = { 
+  programs.lazygit = {
     enable = true;
-    settings = {
-      disableStartupPopups = true;
-    };
+    settings = { disableStartupPopups = true; };
   };
 
   programs.awscli = {
     enable = true;
+    package = stable.awscli2;
     settings = import ./aws_configs.nix;
+  };
+
+  programs.ssh = { enable = true; };
+
+  programs.yazi = { enable = true; };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+    silent = true;
   };
 }
